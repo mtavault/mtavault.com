@@ -1,0 +1,10 @@
+{
+  "input": {
+    "placeholders": {
+      "search": "Suchen..."
+    }
+  },
+  "navigation": {
+    "home": "Startseite"
+  }
+}
