@@ -4,7 +4,7 @@ import tailwindcss from '@tailwindcss/vite';
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  modules: ['@nuxt/eslint', '@nuxt/image', '@nuxt/scripts', '@nuxt/ui', '@nuxtjs/i18n', '@nuxtjs/seo'],
+  modules: ['@nuxt/eslint', '@nuxt/image', '@nuxt/scripts', '@nuxt/ui', '@nuxtjs/i18n', '@nuxtjs/seo', '@vueuse/nuxt', 'motion-v/nuxt'],
 
   i18n: {
     defaultLocale: 'en',
@@ -26,6 +26,17 @@ export default defineNuxtConfig({
       { name: 'Noto Sans', provider: 'google' },
       { name: 'Noto Sans Mono', provider: 'google' },
     ],
+  },
+
+  runtimeConfig: {
+    public: {
+      GIT_COMMIT: 'none',
+      GIT_BRANCH: 'dev',
+      GIT_DATE: '0000-01-01 00:00:00 +0000',
+
+      api: '',
+    },
+    api: '',
   },
 
   robots: {

@@ -9,7 +9,7 @@ export default defineAppConfig({
       info: 'blue',
       warning: 'yellow',
       error: 'red',
-      neutral: 'parchment',
+      neutral: 'neutral',
     },
     icons: {
       arrowDown: 'fas:arrow-down',
@@ -27,7 +27,7 @@ export default defineAppConfig({
     },
     header: {
       slots: {
-        root: 'backdrop-blur-[48px] border-none',
+        root: 'backdrop-blur-[48px]',
       },
     },
 

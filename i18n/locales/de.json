@@ -1,10 +1,21 @@
 {
+  "navigation": {
+    "home": "Startseite"
+  },
+
   "input": {
     "placeholders": {
       "search": "Suchen..."
     }
   },
-  "navigation": {
-    "home": "Startseite"
+
+  "pages": {
+    "index": {
+      "hero": {
+        "headline": "überarbeitet.",
+        "title": "mtavault",
+        "description": "teile Multi Theft Auto: San Andreas maps einfacher denn je."
+      }
+    }
   }
 }

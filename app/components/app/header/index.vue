@@ -6,6 +6,7 @@ const navItems = computed(() => [
     label: t('navigation.home'),
     to: '/',
     icon: 'fas:house',
+    exact: true,
   },
 ]);
 </script>

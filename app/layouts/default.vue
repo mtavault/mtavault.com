@@ -3,9 +3,7 @@
     <AppHeader />
 
     <UMain class="flex-1 min-h-0">
-      <UContainer>
-        <NuxtPage />
-      </UContainer>
+      <NuxtPage />
     </UMain>
 
     <UFooter>

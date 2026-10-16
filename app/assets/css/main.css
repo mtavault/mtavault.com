@@ -2,6 +2,8 @@
 @import '@nuxt/ui';
 
 @theme static {
+  --default-transition-duration: 250ms;
+
   --font-sans: 'Noto Sans', sans-serif;
   --font-mono: 'Noto Sans Mono', monospace;
 
@@ -16,28 +18,29 @@
   --color-clay-800: oklch(44.4% 0.103 36.916);
   --color-clay-900: oklch(38.8% 0.086 36.46);
   --color-clay-950: oklch(25.9% 0.054 38.197);
-  --color-parchment-50: oklch(98% 0.006 100);
-  --color-parchment-100: oklch(96.5% 0.011 99);
-  --color-parchment-200: oklch(93.6% 0.014 97.348);
-  --color-parchment-300: oklch(85.8% 0.018 100);
-  --color-parchment-400: oklch(72.1% 0.015 102.54);
-  --color-parchment-500: oklch(57.8% 0.008 88.877);
-  --color-parchment-600: oklch(43.2% 0.006 91.526);
-  --color-parchment-700: oklch(38.2% 0.003 84.572);
-  --color-parchment-800: oklch(29.3% 0.003 106.588);
-  --color-parchment-900: oklch(21.7% 0.002 106.561);
-  --color-parchment-950: oklch(14.6% 0 0);
 }
 
 :root {
+  --ui-container: 110rem;
   --ui-radius: 0.5rem;
 
+  --ui-bg: var(--ui-color-neutral-950);
+  --ui-bg-muted: var(--ui-color-neutral-900);
+  --ui-text-highlighted: var(--ui-color-neutral-50);
+  --ui-bg-inverted: var(--ui-color-neutral-50);
+  --ui-border-inverted: var(--ui-color-neutral-50);
   --ui-primary: var(--ui-color-primary-500);
+  --ui-bg-elevated: var(--ui-color-neutral-900);
   --ui-bg-accented: var(--ui-color-neutral-800);
-  --ui-bg: var(--ui-color-neutral-900);
-  --ui-bg-muted: var(--ui-color-neutral-800);
-  --ui-bg-elevated: var(--ui-color-neutral-800);
-  --ui-border: var(--ui-color-neutral-800);
-  --ui-border-muted: var(--ui-color-neutral-700);
-  --ui-border-accented: var(--ui-color-neutral-700);
+  --ui-text-inverted: var(--ui-color-neutral-900);
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  @apply transition-opacity;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
 }
