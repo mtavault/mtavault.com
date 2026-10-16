@@ -73,6 +73,10 @@ export default defineNuxtConfig({
     ],
   },
 
+  nitro: {
+    preset: 'bun',
+  },
+
   compatibilityDate: '2025-07-15',
   devtools: { enabled: true },
 });
