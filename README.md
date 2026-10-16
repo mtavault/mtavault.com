@@ -1,6 +1,6 @@
 # mtavault: website
 
-mtavault.com using nuxtjs
+mtavault.com using Nuxt, Nuxt UI and TailwindCSS
 
 ## Setup
 
