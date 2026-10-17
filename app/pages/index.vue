@@ -53,7 +53,6 @@ watch(
 </script>
 <template>
   <Hero />
-  <!-- <UHeader class="top-(--ui-header-height)"> alllla </UHeader> -->
   <div class="sticky top-(--ui-header-height) z-40 border-b border-default backdrop-blur-md bg-default/75 px-4 py-2">
     <UContainer class="flex items-center justify-between">
       <div class="flex md:flex-row flex-col items-center justify-between gap-2 w-full">
