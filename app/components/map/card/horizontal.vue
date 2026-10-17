@@ -17,8 +17,7 @@ const isHovered = useElementHover(wrapper);
 <template>
   <!-- https://cdn.dribbble.com/userupload/47219301/file/55512bef199ad33ba84341c82df326a6.png?resize=1600x1200&vertical=center -->
   <NuxtLink ref="wrapper" to="#" class="bg-elevated rounded-lg p-2 flex gap-4 group relative overflow-hidden transition-all" :class="{ 'p-0!': isHovered }">
-    <!-- group-hover:opacity-0 group-hover:w-0 -->
-    <div class="rounded-lg overflow-hidden aspect-square size-40 group-hover:opacity-0 group-hover:w-0 group-hover:-translate-x-36 transition-all relative">
+    <div class="rounded-lg overflow-hidden aspect-square size-24 md:size-40 group-hover:opacity-0 group-hover:w-0 group-hover:-translate-x-36 transition-all relative">
       <img :src="`https://assets.mtavault.com/yt-proxy/${map.videoURL}/hqdefault.jpg?f=webp`" class="w-full h-full scale-175 object-cover transition-all absolute top-0 left-0" />
     </div>
     <Transition name="gif">
@@ -48,7 +47,7 @@ const isHovered = useElementHover(wrapper);
         </Transition>
 
         <Transition name="fade">
-          <div class="flex gap-4 text-xs justify-between text-nowrap text-muted bg-accented rounded-md px-4 py-2" v-show="!isHovered">
+          <div class="flex gap-4 text-xs justify-between flex-wrap text-nowrap text-muted bg-accented rounded-md px-4 py-2" v-show="!isHovered">
             <div class="flex items-center gap-2">
               <UIcon name="fas:download" class="text-primary" />
               <p>{{ Intl.NumberFormat('en-us', { notation: 'compact' }).format(map.downloads) }}</p>
@@ -62,7 +61,7 @@ const isHovered = useElementHover(wrapper);
               <p>{{ map.awardCount }}</p>
             </div>
             <div class="flex items-center gap-2">
-              <UIcon name="fas:calendar" class="text-secondary" />
+              <UIcon name="fas:calendar-days" class="text-secondary" />
               <p>
                 {{
                   useTimeAgo(map.createdAt, {

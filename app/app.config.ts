@@ -1,4 +1,4 @@
-const variant = 'subtle';
+const variant = 'soft';
 
 export default defineAppConfig({
   ui: {
