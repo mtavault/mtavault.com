@@ -22,7 +22,7 @@
 
 :root {
   --ui-container: 110rem;
-  --ui-radius: 0.5rem;
+  --ui-radius: 0rem;
 
   --ui-bg: var(--ui-color-neutral-950);
   --ui-bg-muted: var(--ui-color-neutral-900);

@@ -53,27 +53,18 @@ watch(
 </script>
 <template>
   <Hero />
-  <UContainer>
-    <div class="flex flex-col lg:grid lg:grid-cols-12 lg:gap-4">
-      <UPageAside class="lg:col-span-2">
-        <div class="flex items-center flex-col gap-4">
-          <UPagination v-model:page="pagination.page" :items-per-page="pagination.size" :total="data?.data?.totalItems" size="sm" variant="soft" :sibling-count="1" />
-          <UInput v-model="search" icon="fas:magnifying-glass" :placeholder="t('input.placeholders.search')" class="w-full" />
-        </div>
-      </UPageAside>
-      <div class="lg:col-span-10">
-        <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 md:p-4">
-          <MapCardHorizontal :map="map" v-for="map in data?.data?.maps" />
-        </div>
+  <!-- <UHeader class="top-(--ui-header-height)"> alllla </UHeader> -->
+  <div class="sticky top-(--ui-header-height) z-40 border-b border-default backdrop-blur-md bg-default/75 px-4 py-2">
+    <UContainer class="flex items-center justify-between">
+      <div class="flex md:flex-row flex-col items-center justify-between gap-2 w-full">
+        <UInput v-model="search" icon="fas:magnifying-glass" :placeholder="t('input.placeholders.search')" size="sm" class="min-w-96" />
+        <UPagination v-model:page="pagination.page" :items-per-page="pagination.size" :total="data?.data?.totalItems" size="sm" variant="soft" />
       </div>
+    </UContainer>
+  </div>
+  <UContainer>
+    <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 md:p-4">
+      <MapCardHorizontal :map="map" v-for="map in data?.data?.maps" />
     </div>
-    <!-- <USplitter id="index-splitter" :items="splitterItems" class="flex flex-col lg:grid lg:grid-cols-10 lg:gap-10">
-      <template #sidebar>sidebar</template>
-      <template #main>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:p-4">
-          <MapCardHorizontal :map="map" v-for="map in data?.data?.maps" />
-        </div>
-      </template>
-    </USplitter> -->
   </UContainer>
 </template>

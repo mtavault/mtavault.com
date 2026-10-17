@@ -27,7 +27,7 @@ export default defineAppConfig({
     },
     header: {
       slots: {
-        root: 'backdrop-blur-[48px]',
+        root: 'backdrop-blur-md',
       },
     },
 
