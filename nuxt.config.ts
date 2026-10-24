@@ -35,6 +35,7 @@ export default defineNuxtConfig({
       GIT_DATE: '0000-01-01 00:00:00 +0000',
 
       api: '',
+      cdn: '',
     },
     api: '',
   },
@@ -71,6 +72,15 @@ export default defineNuxtConfig({
         icons: convertFaToIconify(fab),
       },
     ],
+  },
+
+  image: {
+    providers: {
+      cdn: {
+        name: 'cdn',
+        provider: './providers/mv-cdn.ts',
+      },
+    },
   },
 
   nitro: {

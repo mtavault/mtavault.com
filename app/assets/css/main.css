@@ -22,7 +22,7 @@
 
 :root {
   --ui-container: 110rem;
-  --ui-radius: 0rem;
+  --ui-radius: 0.15rem;
 
   --ui-bg: var(--ui-color-neutral-950);
   --ui-bg-muted: var(--ui-color-neutral-900);
@@ -43,4 +43,15 @@
 .fade-enter-from,
 .fade-leave-to {
   opacity: 0;
+}
+
+.fade-down-enter-active,
+.fade-down-leave-active {
+  @apply transition-all;
+}
+
+.fade-down-enter-from,
+.fade-down-leave-to {
+  opacity: 0;
+  transform: translateY(20px);
 }
