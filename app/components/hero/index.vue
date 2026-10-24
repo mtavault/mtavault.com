@@ -22,7 +22,7 @@ function enterMotion(delay: number = 0) {
   <UPageHero orientation="horizontal">
     <template #headline>
       <Motion v-bind="enterMotion(0.2)">
-        <UBadge color="neutral" variant="soft" :label="t('pages.index.hero.headline')" class="rounded-full px-3 py-1.5 gap-1.5 bg-white/5 backdrop-blur-sm">
+        <UBadge color="neutral" variant="soft" :label="t('pages.index.hero.headline')" class="rounded px-3 py-1.5 gap-1.5 bg-white/5 backdrop-blur-sm">
           <template #leading>
             <UChip inset standalone :ui="{ base: 'animate-pulse ring-0' }" />
           </template>

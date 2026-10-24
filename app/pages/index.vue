@@ -57,13 +57,13 @@ watch(
     <UContainer class="flex items-center justify-between">
       <div class="flex md:flex-row flex-col items-center justify-between gap-2 w-full">
         <UInput v-model="search" icon="fas:magnifying-glass" :placeholder="t('input.placeholders.search')" size="sm" class="min-w-96" />
-        <UPagination v-model:page="pagination.page" :items-per-page="pagination.size" :total="data?.data?.totalItems" size="sm" variant="soft" />
+        <UPagination v-model:page="pagination.page" :items-per-page="pagination.size" :total="data?.meta.total_items" size="sm" variant="soft" />
       </div>
     </UContainer>
   </div>
   <UContainer>
     <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 md:p-4">
-      <MapCardHorizontal :map="map" v-for="map in data?.data?.maps" />
+      <MapCardHorizontal :map="map" v-for="map in data?.data" />
     </div>
   </UContainer>
 </template>
