@@ -18,11 +18,11 @@ const isHovered = useElementHover(wrapper);
   <!-- https://cdn.dribbble.com/userupload/47219301/file/55512bef199ad33ba84341c82df326a6.png?resize=1600x1200&vertical=center -->
   <NuxtLink ref="wrapper" :to="`map/${map.sfu}`" class="bg-elevated rounded-lg p-2 flex gap-4 group relative overflow-hidden transition-all">
     <div class="rounded-lg overflow-hidden aspect-square size-24 md:size-40 group-hover:opacity-0 group-hover:w-0 group-hover:-translate-x-36 transition-all relative">
-      <img :src="`http://localhost:4000/map/${map.id}/images/yt-thumbnail.jpg`" class="w-full h-full scale-175 object-cover transition-all absolute top-0 left-0" />
+      <img :src="`/dl/map/${map.id}/images/yt-thumbnail.jpg`" class="w-full h-full scale-175 object-cover transition-all absolute top-0 left-0" />
     </div>
     <Transition name="gif">
       <div class="absolute top-0 left-0 w-full h-full z-0 opacity-0 group-hover:opacity-100 transition-all" v-show="isHovered">
-        <img :src="`http://localhost:4000/map/${map.id}/images/thumbnail.gif`" class="w-full h-full object-cover transition-all" loading="lazy" />
+        <img :src="`/dl/map/${map.id}/images/thumbnail.gif`" class="w-full h-full object-cover transition-all" loading="lazy" />
       </div>
     </Transition>
     <div class="flex flex-col gap-4 justify-between flex-1 z-10 rounded-lg transition-all" :class="{ '-ml-4': isHovered }">

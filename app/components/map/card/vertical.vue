@@ -18,7 +18,7 @@ const isHovered = useElementHover(wrapper);
   <!-- https://cdn.dribbble.com/userupload/47219301/file/55512bef199ad33ba84341c82df326a6.png?resize=1600x1200&vertical=center -->
   <NuxtLink ref="wrapper" to="#" class="flex flex-col">
     <div class="rounded-lg overflow-hidden aspect-video relative max-w-96">
-      <img :src="`http://localhost:4000/map/${map.id}/images/yt-thumbnail.jpg`" class="w-full h-full scale-175 object-cover transition-all absolute top-0 left-0" />
+      <img :src="`/dl/map/${map.id}/images/yt-thumbnail.jpg`" class="w-full h-full scale-175 object-cover transition-all absolute top-0 left-0" />
     </div>
     <!-- <div class="flex flex-col gap-4 flex-1 z-10 rounded-lg transition-all" :class="{ 'p-4 -ml-4': isHovered }">
       <div class="flex flex-col">
