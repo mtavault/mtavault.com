@@ -18,14 +18,17 @@
   --color-clay-800: oklch(44.4% 0.103 36.916);
   --color-clay-900: oklch(38.8% 0.086 36.46);
   --color-clay-950: oklch(25.9% 0.054 38.197);
+
+  --ui-color-neutral-1000: oklch(10% 0 none);
 }
 
 :root {
-  --ui-container: 110rem;
+  --ui-container: 90rem;
+  /* --ui-container: 110rem; */
   --ui-radius: 0.15rem;
 
   --ui-bg: var(--ui-color-neutral-950);
-  --ui-bg-muted: var(--ui-color-neutral-900);
+  --ui-bg-muted: var(--ui-color-neutral-1000);
   --ui-text-highlighted: var(--ui-color-neutral-50);
   --ui-bg-inverted: var(--ui-color-neutral-50);
   --ui-border-inverted: var(--ui-color-neutral-50);
@@ -35,19 +38,20 @@
   --ui-text-inverted: var(--ui-color-neutral-900);
 }
 
+html {
+  font-size: 15px;
+}
+
+.fade-down-enter-active,
+.fade-down-leave-active,
 .fade-enter-active,
 .fade-leave-active {
-  @apply transition-opacity;
+  @apply transition-all;
 }
 
 .fade-enter-from,
 .fade-leave-to {
   opacity: 0;
-}
-
-.fade-down-enter-active,
-.fade-down-leave-active {
-  @apply transition-all;
 }
 
 .fade-down-enter-from,

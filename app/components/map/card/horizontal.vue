@@ -6,16 +6,7 @@ const props = defineProps<{
 const wrapper = useTemplateRef('wrapper');
 const isHovered = useElementHover(wrapper);
 </script>
-<style>
-.gif-enter-from,
-.gif-leave-to {
-  opacity: 0;
-  transform: translateX(200px);
-  transform-origin: right;
-}
-</style>
 <template>
-  <!-- https://cdn.dribbble.com/userupload/47219301/file/55512bef199ad33ba84341c82df326a6.png?resize=1600x1200&vertical=center -->
   <NuxtLink ref="wrapper" :to="`map/${map.sfu}`" class="bg-elevated rounded-lg p-2 flex gap-4 group relative overflow-hidden transition-all">
     <div class="rounded-lg overflow-hidden aspect-square size-24 md:size-40 group-hover:opacity-0 group-hover:w-0 group-hover:-translate-x-36 transition-all delay-150 relative">
       <NuxtImg
@@ -54,20 +45,20 @@ const isHovered = useElementHover(wrapper);
         </Transition>
 
         <Transition name="fade-down">
-          <div class="flex gap-8 text-xs flex-wrap text-nowrap justify-between text-muted bg-accented rounded-md px-4 py-2" :class="{ 'delay-400': !isHovered }" v-show="!isHovered">
-            <div class="flex items-center gap-2">
+          <div class="flex gap-4 text-xs flex-wrap text-nowrap justify-between text-muted font-mono" :class="{ 'delay-400': !isHovered }" v-show="!isHovered">
+            <div class="flex items-center gap-2 bg-accented px-2 py-1 rounded">
               <UIcon name="fas:download" class="text-primary" />
               <p>{{ Intl.NumberFormat('en-us', { notation: 'compact' }).format(map.downloads) }}</p>
             </div>
-            <div class="flex items-center gap-2">
+            <div class="flex items-center gap-2 bg-accented px-2 py-1 rounded">
               <UIcon name="fas:hearts" class="text-red-400" />
               <p>{{ map.ratingTotal || '-' }}</p>
             </div>
-            <div class="flex items-center gap-2">
+            <div class="flex items-center gap-2 bg-accented px-2 py-1 rounded">
               <UIcon name="fas:award" class="text-yellow-400" />
               <p>{{ map.awardCount || 0 }}</p>
             </div>
-            <div class="flex items-center gap-2">
+            <div class="flex items-center gap-2 bg-accented px-2 py-1 rounded">
               <UIcon name="fas:calendar-days" class="text-secondary" />
               <p>
                 {{

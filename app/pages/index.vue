@@ -62,8 +62,8 @@ watch(
     </UContainer>
   </div>
   <UContainer>
-    <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 md:p-4">
-      <MapCardHorizontal :map="map" v-for="map in data?.data" />
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:p-4">
+      <MapCardVertical :map="map" v-for="map in [...data?.data, ...data?.data, ...data?.data, ...data?.data, ...data?.data, ...data?.data]" />
     </div>
   </UContainer>
 </template>

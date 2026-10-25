@@ -1,0 +1,39 @@
+<script lang="ts" setup>
+const props = defineProps<{
+  map: any;
+}>();
+
+const wrapper = useTemplateRef('wrapper');
+const isHovered = useElementHover(wrapper);
+</script>
+<template>
+  <div class="relative min-w-0 bg-elevated border border-default rounded hidden">
+    <NuxtImg :src="`/map/${map.id}/images/yt-thumbnail.jpg`" :key="map.id + 'img'" :alt="map.name" :width="250" class="w-full h-full aspect-video" provider="cdn" />
+  </div>
+  <div class="relative min-w-0 bg-elevated rounded border border-default">
+    <!-- Link Overlay -->
+    <NuxtLink :to="`/map/${map.sfu}`" class="absolute top-0 left-0 w-full h-full z-10" />
+
+    <!-- Image -->
+    <div class="w-full rounded overflow-hidden aspect-video relative">
+      <NuxtImg :src="`/map/${map.id}/images/yt-thumbnail.jpg`" :key="map.id + 'img'" :alt="map.name" :width="250" class="w-full object-cover scale-125 h-full z-1 aspect-video" provider="cdn" />
+      <Transition name="fade">
+        <LazyNuxtImg
+          :src="`/map/${map.id}/images/yt-preview.webp`"
+          :key="map.id + 'anim'"
+          :alt="map.name"
+          class="w-full h-full object-cover transition-all absolute top-0 left-0 z-20 scale-175"
+          :class="{ 'scale-100!': isHovered }"
+          provider="cdn"
+          v-if="isHovered"
+        />
+      </Transition>
+    </div>
+
+    <!-- Map Name & Author -->
+    <div class="flex flex-col gap-2 p-2">
+      <h3 class="font-bold text-highlighted">{{ map.name }}</h3>
+      <p class="text-sm text-muted">by dnlk & Strix</p>
+    </div>
+  </div>
+</template>

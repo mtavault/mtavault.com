@@ -6,14 +6,6 @@
       <NuxtPage />
     </UMain>
 
-    <UFooter>
-      <template #left>
-        <p class="text-sm text-muted">mtavault.com • © {{ new Date().getFullYear() }}</p>
-      </template>
-
-      <template #right>
-        <UButton to="https://github.com/mtavault/" target="_blank" icon="fab:github" aria-label="GitHub" color="neutral" variant="ghost" />
-      </template>
-    </UFooter>
+    <AppFooter />
   </div>
 </template>

@@ -19,29 +19,7 @@ function enterMotion(delay: number = 0) {
 }
 </script>
 <template>
-  <UPageHero orientation="horizontal">
-    <template #headline>
-      <Motion v-bind="enterMotion(0.2)">
-        <UBadge color="neutral" variant="soft" :label="t('pages.index.hero.headline')" class="rounded px-3 py-1.5 gap-1.5 bg-white/5 backdrop-blur-sm">
-          <template #leading>
-            <UChip inset standalone :ui="{ base: 'animate-pulse ring-0' }" />
-          </template>
-        </UBadge>
-      </Motion>
-    </template>
-
-    <template #title>
-      <Motion as="span" v-bind="enterMotion(0.35)" class="inline-block">
-        {{ t('pages.index.hero.title') }}
-      </Motion>
-    </template>
-
-    <template #description>
-      <Motion as="span" v-bind="enterMotion(0.5)" class="inline-block">
-        {{ t('pages.index.hero.description') }}
-      </Motion>
-    </template>
-
+  <UPageHero orientation="vertical">
     <template #top>
       <Motion v-bind="staggerMotion(0)">
         <HeroShader class="absolute top-0 inset-x-0 opacity-15 h-full" />
@@ -52,6 +30,15 @@ function enterMotion(delay: number = 0) {
         style="background: radial-gradient(ellipse at center, color-mix(in oklch, var(--ui-primary) 6%, transparent) 0%, transparent 70%)"
       />
     </template>
+
+    <div class="flex flex-col">
+      <Motion as="span" v-bind="enterMotion(0.35)" class="inline-block text-4xl font-bold">
+        {{ t('pages.index.hero.title') }}
+      </Motion>
+      <Motion as="span" v-bind="enterMotion(0.5)" class="inline-block text-muted">
+        {{ t('pages.index.hero.description') }}
+      </Motion>
+    </div>
 
     <HeroCarousel />
   </UPageHero>

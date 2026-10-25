@@ -86,5 +86,15 @@ export default defineAppConfig({
         variant,
       },
     },
+    pageHero: {
+      slots: {
+        container: 'py-16! gap-4!',
+      },
+    },
+    footer: {
+      slots: {
+        root: 'bg-muted pt-32',
+      },
+    },
   },
 });
