@@ -1,20 +1,20 @@
 <script lang="ts" setup>
 const { $api } = useNuxtApp();
 
-const { data } = await useAsyncData('maps/featured', () => $api('maps/featured'));
+const { data } = await useAsyncData('featured-resources', () => $api('resource/featured'));
 </script>
 <template>
   <UCarousel
-    :items="[...data, ...data, ...data]"
+    :items="data"
     v-slot="{ item }"
     arrows
     loop
     dots
     class-names
     :autoplay="{ delay: 10000 }"
-    :ui="{ viewport: 'rounded-lg', item: `transition-opacity [&:not(.is-snapped)]:opacity-70 basis-[50%]` }"
+    :ui="{ viewport: 'rounded-lg', item: `transition-[filter] [&:not(.is-snapped)]:brightness-50 basis-[50%]` }"
     v-if="data"
   >
-    <MapCardVerticalSimple :map="item" :key="item.id" />
+    <ResourceCardVerticalSimple :map="item" :key="item.id" />
   </UCarousel>
 </template>

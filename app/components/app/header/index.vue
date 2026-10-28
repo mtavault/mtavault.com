@@ -8,6 +8,11 @@ const navItems = computed(() => [
     icon: 'fas:house',
     exact: true,
   },
+  {
+    label: t('navigation.search'),
+    to: '/search',
+    icon: 'fas:magnifying-glass',
+  },
 ]);
 </script>
 <template>

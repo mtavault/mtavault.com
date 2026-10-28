@@ -1,6 +1,7 @@
 {
   "navigation": {
-    "home": "Home"
+    "home": "Discover",
+    "search": "Browse All"
   },
 
   "input": {
@@ -10,10 +11,17 @@
   },
 
   "pages": {
-    "index": {
+    "discover": {
       "hero": {
         "title": "mtavault",
         "description": "share Multi Theft Auto: San Andreas maps easier than ever."
+      },
+      "headers": {
+        "latest": {
+          "map": "Latest Maps",
+          "asset": "Latest Assets",
+          "generic": "Latest Resources"
+        }
       }
     }
   }

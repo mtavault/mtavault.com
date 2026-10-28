@@ -36,10 +36,56 @@
   --ui-bg-elevated: var(--ui-color-neutral-900);
   --ui-bg-accented: var(--ui-color-neutral-800);
   --ui-text-inverted: var(--ui-color-neutral-900);
+
+  --ratio: 1.5;
+
+  /* --s0 is our base, or fundamental */
+  --s0: 15px;
+  --s1: calc(var(--s0) * var(--ratio));
+  --s2: calc(var(--s1) * var(--ratio));
+  --s3: calc(var(--s2) * var(--ratio));
+  --s-1: calc(var(--s0) / var(--ratio));
+  --s-2: calc(var(--s-1) / var(--ratio));
+  --s-3: calc(var(--s-2) / var(--ratio));
 }
 
 html {
-  font-size: 15px;
+  font-size: var(--s0);
+}
+
+h1 {
+  font-size: var(--s3);
+}
+h2 {
+  font-size: var(--s2);
+}
+h3 {
+  font-size: var(--s1);
+}
+
+/* Calculate the half step for the h4 */
+h4 {
+  font-size: calc(var(--s0) * sqrt(var(--ratio)));
+  font-weight: 600;
+}
+
+/* Set h5 and h6 to the size of the body copy */
+h5,
+h6 {
+  font-size: var(--s0);
+}
+
+/* Use the font weight third, only on the h6 */
+h6 {
+  font-weight: 500;
+}
+
+/* Use colour as a secondary indicator (optional) */
+h5 {
+  color: color-mix(in oklch, currentColor 75%, transparent);
+}
+h6 {
+  color: color-mix(in oklch, currentColor 65%, transparent);
 }
 
 .fade-down-enter-active,

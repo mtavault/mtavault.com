@@ -1,6 +1,7 @@
 {
   "navigation": {
-    "home": "Startseite"
+    "home": "Startseite",
+    "search": "Alle Durchstöbern"
   },
 
   "input": {
@@ -10,10 +11,17 @@
   },
 
   "pages": {
-    "index": {
+    "discover": {
       "hero": {
         "title": "mtavault",
         "description": "teile Multi Theft Auto: San Andreas maps einfacher denn je."
+      },
+      "headers": {
+        "latest": {
+          "map": "Neueste Maps",
+          "asset": "Neueste Assets",
+          "generic": "Neueste Resourcen"
+        }
       }
     }
   }

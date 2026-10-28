@@ -33,10 +33,10 @@ function enterMotion(delay: number = 0) {
 
     <div class="flex flex-col">
       <Motion as="span" v-bind="enterMotion(0.35)" class="inline-block text-4xl font-bold">
-        {{ t('pages.index.hero.title') }}
+        {{ t('pages.discover.hero.title') }}
       </Motion>
       <Motion as="span" v-bind="enterMotion(0.5)" class="inline-block text-muted">
-        {{ t('pages.index.hero.description') }}
+        {{ t('pages.discover.hero.description') }}
       </Motion>
     </div>
 

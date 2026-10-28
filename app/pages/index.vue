@@ -53,17 +53,24 @@ watch(
 </script>
 <template>
   <Hero />
-  <div class="sticky top-(--ui-header-height) z-40 border-b border-default backdrop-blur-md bg-default/75 px-4 py-2">
+  <!-- <div class="sticky top-(--ui-header-height) z-40 border-b border-default backdrop-blur-md bg-default/75 px-4 py-2">
     <UContainer class="flex items-center justify-between">
       <div class="flex md:flex-row flex-col items-center justify-between gap-2 w-full">
         <UInput v-model="search" icon="fas:magnifying-glass" :placeholder="t('input.placeholders.search')" size="sm" class="min-w-96" />
         <UPagination v-model:page="pagination.page" :items-per-page="pagination.size" :total="data?.meta.total_items" size="sm" variant="soft" />
       </div>
     </UContainer>
-  </div>
-  <UContainer>
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:p-4">
-      <MapCardVertical :map="map" v-for="map in [...data?.data, ...data?.data, ...data?.data, ...data?.data, ...data?.data, ...data?.data]" />
+  </div> -->
+  <UContainer class="p-4">
+    <div class="flex flex-col gap-16 my-16">
+      <PageDiscoverLatestResource variant="map" />
+
+      <PageDiscoverLatestResource variant="asset" />
+
+      <PageDiscoverLatestResource variant="generic" />
     </div>
+    <!-- <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:p-4">
+      <ResourceCardVertical :map="map" v-for="map in [...data?.data, ...data?.data, ...data?.data, ...data?.data, ...data?.data, ...data?.data]" />
+    </div> -->
   </UContainer>
 </template>

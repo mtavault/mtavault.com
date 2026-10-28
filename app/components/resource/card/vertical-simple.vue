@@ -12,7 +12,7 @@ const isHovered = useElementHover(wrapper);
   </div>
   <div class="relative min-w-0 bg-elevated rounded border border-default">
     <!-- Link Overlay -->
-    <NuxtLink :to="`/map/${map.sfu}`" class="absolute top-0 left-0 w-full h-full z-10" />
+    <NuxtLink :to="`/res/${map.sfu}`" class="absolute top-0 left-0 w-full h-full z-10" />
 
     <!-- Image -->
     <div class="w-full rounded overflow-hidden aspect-video relative">
