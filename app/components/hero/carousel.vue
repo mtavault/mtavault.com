@@ -12,7 +12,7 @@ const { data } = await useAsyncData('featured-resources', () => $api('resource/f
     dots
     class-names
     :autoplay="{ delay: 10000 }"
-    :ui="{ viewport: 'rounded-lg', item: `transition-[filter] [&:not(.is-snapped)]:brightness-50 basis-[50%]` }"
+    :ui="{ viewport: 'rounded-lg', item: `transition-[filter] [&:not(.is-snapped)]:brightness-50 basis-[85%] md:basis-[50%]!` }"
     v-if="data"
   >
     <ResourceCardVerticalSimple :res="item" :key="item.id" />
