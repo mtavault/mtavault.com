@@ -15,6 +15,6 @@ const { data } = await useAsyncData('featured-resources', () => $api('resource/f
     :ui="{ viewport: 'rounded-lg', item: `transition-[filter] [&:not(.is-snapped)]:brightness-50 basis-[50%]` }"
     v-if="data"
   >
-    <ResourceCardVerticalSimple :map="item" :key="item.id" />
+    <ResourceCardVerticalSimple :res="item" :key="item.id" />
   </UCarousel>
 </template>

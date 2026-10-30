@@ -50,7 +50,14 @@ const isHovered = useElementHover(wrapper);
       <!-- Map Name & Author -->
       <div class="flex flex-col gap-2 p-2">
         <h4 class="text-highlighted">{{ res.name }}</h4>
-        <p class="text-sm text-muted">by some authors</p>
+        <p class="text-sm text-muted z-60">
+          by
+          <template v-for="(author, index) in res.authors">
+            <template v-if="index !== 0 && index < res.authors.length - 1">,&nbsp;</template>
+            <template v-else-if="index !== 0 && index === res.authors.length - 1">&nbsp;&&nbsp;</template>
+            <ULink to="#" class="z-60">{{ author.name }}</ULink>
+          </template>
+        </p>
       </div>
 
       <div class="flex flex-col gap-4">
