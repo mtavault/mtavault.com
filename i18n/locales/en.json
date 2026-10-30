@@ -14,7 +14,7 @@
     "discover": {
       "hero": {
         "title": "mtavault",
-        "description": "Discover, share and download the best Multi Theft Auto: San Andreas maps, resources and assets.",
+        "description": "Discover, share and download the best Multi Theft Auto: San Andreas maps, resources and models.",
         "browse": "Browse",
         "share": "Share Your Creation",
         "features": {
@@ -31,13 +31,13 @@
       "headers": {
         "latest": {
           "map": "Latest Maps",
-          "asset": "Latest Assets",
-          "generic": "Latest Resources"
+          "model": "Latest Models",
+          "resource": "Latest Resources"
         },
         "popular": {
           "map": "Popular Maps",
-          "asset": "Popular Assets",
-          "generic": "Popular Resources"
+          "model": "Popular Models",
+          "resource": "Popular Resources"
         }
       }
     }

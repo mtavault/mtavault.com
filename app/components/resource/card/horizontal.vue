@@ -1,13 +1,69 @@
 <script lang="ts" setup>
 const props = defineProps<{
-  map: any;
+  res: any;
 }>();
 
 const wrapper = useTemplateRef('wrapper');
 const isHovered = useElementHover(wrapper);
 </script>
 <template>
-  <NuxtLink ref="wrapper" :to="`res/${map.sfu}`" class="bg-elevated rounded-lg p-2 flex gap-4 group relative overflow-hidden transition-all">
+  <ResourceLink ref="wrapper" :id="res.id" :type="res.type" class="rounded-lg border border-default bg-elevated relative">
+    <div class="absolute top-1 right-1 z-10 bg-accented px-2 py-1 rounded-lg text-xs text-muted">
+      {{ res.type }}
+    </div>
+    <div class="flex gap-4 p-2">
+      <div class="aspect-square w-32 h-32 relative overflow-hidden rounded-lg">
+        <ResourceThumbnail :id="res.id" :width="250" class="aspect-square scale-150 object-cover" />
+      </div>
+      <div class="flex flex-col justify-between">
+        <div class="flex flex-col">
+          <h4 class="text-highlighted">{{ res.name }}</h4>
+          <p class="text-sm text-muted z-60">
+            by
+            <template v-for="(author, index) in res.authors">
+              <template v-if="index !== 0 && index < res.authors.length - 1">,&nbsp;</template>
+              <template v-else-if="index !== 0 && index === res.authors.length - 1">&nbsp;&&nbsp;</template>
+              <ULink to="#" class="z-60">{{ author.name }}</ULink>
+            </template>
+          </p>
+        </div>
+
+        <div class="flex flex-col">
+          <div class="flex gap-4 text-xs flex-wrap text-nowrap justify-between text-muted font-mono">
+            <div class="flex items-center gap-2 bg-accented px-2 py-1 rounded-lg">
+              <UIcon name="fas:download" class="text-primary" />
+              <p>{{ Intl.NumberFormat('en-us', { notation: 'compact' }).format(res.downloads) }}</p>
+            </div>
+            <div class="flex items-center gap-2 bg-accented px-2 py-1 rounded-lg">
+              <UIcon name="fas:hearts" class="text-red-400" />
+              <p>{{ res.ratingTotal || '-' }}</p>
+            </div>
+            <div class="flex items-center gap-2 bg-accented px-2 py-1 rounded-lg">
+              <UIcon name="fas:award" class="text-yellow-400" />
+              <p>{{ res.awardCount || 0 }}</p>
+            </div>
+            <div class="flex items-center gap-2 bg-accented px-2 py-1 rounded-lg">
+              <UIcon name="fas:calendar-days" class="text-secondary" />
+              <p>
+                {{
+                  useTimeAgo(res.createdAt, {
+                    max: 'day',
+                    fullDateFormatter: (date) => {
+                      return new Intl.DateTimeFormat('en-US', {
+                        dateStyle: 'medium',
+                      }).format(date);
+                    },
+                  })
+                }}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ResourceLink>
+
+  <!-- <NuxtLink ref="wrapper" :to="`res/${map.sfu}`" class="bg-elevated rounded-lg p-2 flex gap-4 group relative overflow-hidden transition-all">
     <div class="rounded-lg overflow-hidden aspect-square size-24 md:size-40 group-hover:opacity-0 group-hover:w-0 group-hover:-translate-x-36 transition-all delay-150 relative">
       <ResourceThumbnail :id="map.id" :width="250" class="w-full h-full scale-175 object-cover transition-all absolute top-0 left-0" />
     </div>
@@ -70,5 +126,5 @@ const isHovered = useElementHover(wrapper);
         </Transition>
       </div>
     </div>
-  </NuxtLink>
+  </NuxtLink> -->
 </template>

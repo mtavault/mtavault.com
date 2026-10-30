@@ -31,13 +31,13 @@
       "headers": {
         "latest": {
           "map": "Neueste Maps",
-          "asset": "Neueste Assets",
-          "generic": "Neueste Resourcen"
+          "model": "Neueste Modelle",
+          "resource": "Neueste Resourcen"
         },
         "popular": {
           "map": "Beliebte Maps",
-          "asset": "Beliebte Assets",
-          "generic": "Beliebte Resourcen"
+          "model": "Beliebte Modelle",
+          "resource": "Beliebte Resourcen"
         }
       }
     }

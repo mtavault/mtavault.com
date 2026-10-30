@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 const props = defineProps<{
   id: any;
-  type: 'map' | 'asset' | 'generic';
+  type: 'map' | 'model' | 'resource';
 }>();
 </script>
 <template>

@@ -1,5 +1,8 @@
 <script lang="ts" setup>
+const { $api } = useNuxtApp();
 const { t } = useI18n();
+
+const { data } = await useLazyAsyncData<Number>('resource-count', () => $api('resource/count'));
 </script>
 <template>
   <div class="relative isolate min-h-96 flex items-center py-16">
@@ -8,17 +11,23 @@ const { t } = useI18n();
     <UContainer class="grid grid-cols-12">
       <div class="col-span-6">
         <div class="flex flex-col gap-16">
-          <div class="flex flex-col">
-            <p class="font-mono text-primary text-xs font-bold uppercase">> 2.671 resources</p>
-            <h1 class="font-bold">{{ t('pages.discover.hero.title') }}</h1>
-            <p class="text-muted ml-4 max-w-96">{{ t('pages.discover.hero.description') }}</p>
+          <div class="flex flex-col gap-4">
+            <div class="flex flex-col">
+              <p class="font-mono text-primary text-xs font-bold uppercase" v-if="data">> {{ data.toLocaleString('en-US') }} resources</p>
+              <!-- Title -->
+              <h1 class="font-bold">{{ t('pages.discover.hero.title') }}</h1>
+              <!-- Description -->
+              <p class="text-muted ml-4 max-w-96">{{ t('pages.discover.hero.description') }}</p>
+            </div>
+
+            <!-- Buttons -->
+            <div class="flex items-center gap-8">
+              <UButton :label="t('pages.discover.hero.browse')" to="/search" icon="fas:objects-column" trailing-icon="fas:arrow-right" variant="solid" size="xxl" />
+              <UButton :label="t('pages.discover.hero.share')" icon="fas:cloud-arrow-up" variant="outline" size="xxl" />
+            </div>
           </div>
 
-          <div class="flex items-center gap-8">
-            <UButton :label="t('pages.discover.hero.browse')" to="/search" icon="fas:objects-column" trailing-icon="fas:arrow-right" variant="solid" size="xxl" />
-            <UButton :label="t('pages.discover.hero.share')" icon="fas:cloud-arrow-up" variant="outline" size="xxl" />
-          </div>
-
+          <!-- Features -->
           <div class="flex items-center gap-8">
             <div class="flex items-center gap-4">
               <UIcon name="fas:shield-check" class="size-8 text-primary" />
@@ -41,6 +50,7 @@ const { t } = useI18n();
         </div>
       </div>
       <div class="col-span-6">
+        <!-- Carousel -->
         <HeroCarousel />
       </div>
     </UContainer>

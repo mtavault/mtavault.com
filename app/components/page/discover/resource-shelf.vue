@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 const props = defineProps<{
-  resourceVariant: 'map' | 'asset' | 'generic';
+  resourceVariant: 'map' | 'model' | 'resource';
   sortVariant: 'latest' | 'popular';
 }>();
 
@@ -20,6 +20,7 @@ const pageItems = computed(() => {
   <div class="flex flex-col gap-4">
     <div class="flex justify-between">
       <div class="flex items-center gap-4">
+        <div class="w-8 h-1 rounded-full bg-primary" />
         <h4>{{ t(`pages.discover.headers.${sortVariant}.${resourceVariant}`) }}</h4>
         <UButton label="View All" :to="`search?variant=${resourceVariant}&sortBy=${sortVariant}`" color="neutral" />
       </div>

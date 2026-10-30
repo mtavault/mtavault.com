@@ -5,19 +5,40 @@ const route = useRoute();
 const { t } = useI18n();
 
 const DEFAULT_PAGE_SIZE = 20;
+const VARIANTS = [
+  {
+    label: 'All',
+    value: '',
+  },
+  {
+    label: 'Maps',
+    value: 'map',
+  },
+  {
+    label: 'Resources',
+    value: 'resource',
+  },
+  {
+    label: 'Models',
+    value: 'model',
+  },
+];
 
 const search = ref(route.query?.search || '');
+const variant = ref(route.query?.variant || '');
+const sortBy = ref(route.query?.sortBy || '');
 const pagination = ref({
   page: route.query?.page || 1,
   size: route.query?.size || DEFAULT_PAGE_SIZE,
 });
 
-const { data, refresh } = await useAsyncData('maps', () =>
-  $api('maps', {
+const { data, refresh } = await useAsyncData('resources', () =>
+  $api('resource', {
     query: {
       page: pagination.value.page,
       size: pagination.value.size,
       search: search.value,
+      type: variant.value.length ? variant.value : undefined,
     },
   }),
 );
@@ -28,6 +49,8 @@ const updateQueryParameters = () => {
       page: pagination.value.page > 1 ? pagination.value.page : undefined,
       limit: pagination.value.size !== DEFAULT_PAGE_SIZE ? pagination.value.size : undefined,
       search: search.value.length ? search.value : undefined,
+      variant: variant.value.length ? variant.value : undefined,
+      sortBy: sortBy.value.length ? sortBy.value : undefined,
     },
   });
 };
@@ -43,7 +66,7 @@ watchDebounced(
 );
 
 watch(
-  [pagination],
+  [pagination, variant],
   () => {
     refresh();
     updateQueryParameters();
@@ -60,29 +83,26 @@ watch(
 
           <div class="flex flex-col gap-2">
             <h4>Filters</h4>
-            <UAccordion
-              type="multiple"
-              :items="[
-                {
-                  label: 'Browse by',
-                  slot: 'browse-by',
-                },
-                {
-                  label: 'Tags',
-                  slot: 'tags',
-                },
-              ]"
-            >
-              <template #browse-by>
-                <URadioGroup :items="['All', 'Maps', 'Assets', 'Resources']" variant="card" />
+            <!-- Browse By -->
+            <UCollapsible class="gap-2 flex flex-col" default-open>
+              <template #default="{ open }">
+                <UButton label="Browse by" :variant="open ? 'soft' : 'ghost'" color="neutral" class="w-full flex justify-between items-center" size="xl">
+                  <template #trailing>
+                    <UIcon name="fas:chevron-up" class="transition-all" :class="{ 'rotate-180': !open }" />
+                  </template>
+                </UButton>
               </template>
-              <template #tags>tags</template>
-            </UAccordion>
+              <template #content>
+                <UCard variant="soft">
+                  <URadioGroup v-model="variant" :items="VARIANTS" />
+                </UCard>
+              </template>
+            </UCollapsible>
           </div>
         </div>
       </UPageAside>
       <div class="lg:col-span-9 md:p-4 flex flex-col gap-4">
-        <ResourceCardHorizontal :map="map" v-for="map in [...data?.data, ...data?.data, ...data?.data, ...data?.data, ...data?.data, ...data?.data]" />
+        <ResourceCardHorizontal :res="map" v-for="map in data?.data" />
       </div>
     </div>
   </UContainer>

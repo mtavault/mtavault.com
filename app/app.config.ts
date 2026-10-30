@@ -38,7 +38,7 @@ export default defineAppConfig({
       variants: {
         size: {
           xxl: {
-            base: 'px-6 py-3.5 text-lg gap-2.5 rounded-lg',
+            base: 'px-5 py-2.5 text-lg gap-2.5 rounded-lg',
             leadingIcon: 'size-6',
             trailingIcon: 'size-6',
           },
