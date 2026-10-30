@@ -63,11 +63,14 @@ watch(
   </div> -->
   <UContainer class="p-4">
     <div class="flex flex-col gap-16 my-16">
-      <PageDiscoverLatestResource variant="map" />
+      <PageDiscoverResourceShelf sort-variant="latest" resource-variant="map" />
+      <PageDiscoverResourceShelf sort-variant="popular" resource-variant="map" />
 
-      <PageDiscoverLatestResource variant="asset" />
+      <PageDiscoverResourceShelf sort-variant="latest" resource-variant="asset" />
+      <PageDiscoverResourceShelf sort-variant="popular" resource-variant="asset" />
 
-      <PageDiscoverLatestResource variant="generic" />
+      <PageDiscoverResourceShelf sort-variant="latest" resource-variant="generic" />
+      <PageDiscoverResourceShelf sort-variant="popular" resource-variant="generic" />
     </div>
     <!-- <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:p-4">
       <ResourceCardVertical :map="map" v-for="map in [...data?.data, ...data?.data, ...data?.data, ...data?.data, ...data?.data, ...data?.data]" />

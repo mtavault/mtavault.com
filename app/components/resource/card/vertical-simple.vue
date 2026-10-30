@@ -10,13 +10,21 @@ const isHovered = useElementHover(wrapper);
   <div class="relative min-w-0 bg-elevated border border-default rounded hidden">
     <NuxtImg :src="`/map/${map.id}/images/yt-thumbnail.jpg`" :key="map.id + 'img'" :alt="map.name" :width="250" class="w-full h-full aspect-video" provider="cdn" />
   </div>
-  <div class="relative min-w-0 bg-elevated rounded border border-default">
+  <div ref="wrapper" class="relative min-w-0 bg-elevated rounded border border-default">
     <!-- Link Overlay -->
     <NuxtLink :to="`/res/${map.sfu}`" class="absolute top-0 left-0 w-full h-full z-10" />
 
     <!-- Image -->
-    <div class="w-full rounded overflow-hidden aspect-video relative">
-      <NuxtImg :src="`/map/${map.id}/images/yt-thumbnail.jpg`" :key="map.id + 'img'" :alt="map.name" :width="250" class="w-full object-cover scale-125 h-full z-1 aspect-video" provider="cdn" />
+    <div class="w-full rounded overflow-hidden aspect-video relative pointer-events-none">
+      <NuxtImg
+        :src="`/map/${map.id}/images/yt-thumbnail.jpg`"
+        :key="map.id + 'img'"
+        :alt="map.name"
+        :width="250"
+        class="w-full object-cover scale-125 h-full z-1 aspect-video"
+        provider="cdn"
+        placeholder="/img/fallback.webp"
+      />
       <Transition name="fade">
         <LazyNuxtImg
           :src="`/map/${map.id}/images/yt-preview.webp`"

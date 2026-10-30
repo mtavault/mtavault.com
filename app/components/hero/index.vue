@@ -21,14 +21,14 @@ function enterMotion(delay: number = 0) {
 <template>
   <UPageHero orientation="vertical">
     <template #top>
-      <Motion v-bind="staggerMotion(0)">
+      <!-- <Motion v-bind="staggerMotion(0)">
         <HeroShader class="absolute top-0 inset-x-0 opacity-15 h-full" />
-      </Motion>
+      </Motion> -->
 
-      <div
+      <!-- <div
         class="pointer-events-none absolute left-1/2 -translate-x-1/2 top-0 w-2/3 h-1/2"
         style="background: radial-gradient(ellipse at center, color-mix(in oklch, var(--ui-primary) 6%, transparent) 0%, transparent 70%)"
-      />
+      /> -->
     </template>
 
     <div class="flex flex-col">

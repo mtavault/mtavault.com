@@ -21,6 +21,11 @@
           "map": "Latest Maps",
           "asset": "Latest Assets",
           "generic": "Latest Resources"
+        },
+        "popular": {
+          "map": "Popular Maps",
+          "asset": "Popular Assets",
+          "generic": "Popular Resources"
         }
       }
     }

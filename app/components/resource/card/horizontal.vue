@@ -16,6 +16,7 @@ const isHovered = useElementHover(wrapper);
         :width="250"
         class="w-full h-full scale-175 object-cover transition-all absolute top-0 left-0"
         provider="cdn"
+        placeholder="/img/fallback.webp"
       />
     </div>
     <Transition name="fade">
