@@ -79,7 +79,7 @@ watch(
     <div class="flex flex-col lg:grid lg:grid-cols-12 lg:gap-4">
       <UPageAside class="lg:col-span-3 md:p-4">
         <div class="flex flex-col gap-8">
-          <UInput v-model="search" icon="fas:magnifying-glass" :placeholder="t('input.placeholders.search')" class="w-full" />
+          <UInput v-model="search" icon="fas:magnifying-glass" :placeholder="t('input.placeholders.search')" size="xl" class="w-full" />
 
           <div class="flex flex-col gap-2">
             <h4>Filters</h4>
