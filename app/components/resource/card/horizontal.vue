@@ -9,19 +9,11 @@ const isHovered = useElementHover(wrapper);
 <template>
   <NuxtLink ref="wrapper" :to="`res/${map.sfu}`" class="bg-elevated rounded-lg p-2 flex gap-4 group relative overflow-hidden transition-all">
     <div class="rounded-lg overflow-hidden aspect-square size-24 md:size-40 group-hover:opacity-0 group-hover:w-0 group-hover:-translate-x-36 transition-all delay-150 relative">
-      <NuxtImg
-        :src="`/map/${map.id}/images/yt-thumbnail.jpg`"
-        :key="map.id"
-        :alt="map.name"
-        :width="250"
-        class="w-full h-full scale-175 object-cover transition-all absolute top-0 left-0"
-        provider="cdn"
-        placeholder="/img/fallback.webp"
-      />
+      <ResourceThumbnail :id="map.id" :width="250" class="w-full h-full scale-175 object-cover transition-all absolute top-0 left-0" />
     </div>
-    <Transition name="fade">
+    <Transition name="fade" v-if="map.videoID">
       <div class="absolute top-0 left-0 w-full h-full z-0 opacity-0 group-hover:opacity-100 transition-all delay-150" v-show="isHovered">
-        <LazyNuxtImg :src="`/map/${map.id}/images/yt-preview.webp`" :key="map.id" :alt="map.name" class="w-full h-full object-cover transition-all" provider="cdn" />
+        <LazyNuxtImg :src="`/media/${map.id}/images/yt-preview.webp`" :key="map.id" :alt="map.name" class="w-full h-full object-cover transition-all" provider="cdn" />
       </div>
     </Transition>
     <div class="flex flex-col gap-4 justify-between flex-1 z-10 rounded-lg transition-all delay-150" :class="{ '-ml-4': isHovered }">

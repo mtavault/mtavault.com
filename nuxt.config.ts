@@ -6,10 +6,21 @@ import tailwindcss from '@tailwindcss/vite';
 export default defineNuxtConfig({
   modules: ['@nuxt/eslint', '@nuxt/image', '@nuxt/scripts', '@nuxt/ui', '@nuxtjs/i18n', '@nuxtjs/seo', '@vueuse/nuxt', 'motion-v/nuxt'],
 
+  routeRules: {
+    '/': {
+      // prerender: true,
+      // swr: true,
+    },
+    '/res/**': {
+      // swr: true,
+    },
+  },
+
   i18n: {
     defaultLocale: 'en',
     detectBrowserLanguage: {
       alwaysRedirect: true,
+
       redirectOn: 'all',
       fallbackLocale: 'en',
       cookieKey: 'mtavault-lang',

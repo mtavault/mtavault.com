@@ -7,27 +7,19 @@ const wrapper = useTemplateRef('wrapper');
 const isHovered = useElementHover(wrapper);
 </script>
 <template>
-  <div class="relative min-w-0 bg-elevated border border-default rounded hidden">
+  <div class="relative min-w-0 bg-elevated border border-default rounded-lg hidden">
     <NuxtImg :src="`/map/${res.id}/images/yt-thumbnail.jpg`" :key="res.id + 'img'" :alt="res.name" :width="250" class="w-full h-full aspect-video" provider="cdn" />
   </div>
   <div ref="wrapper" class="relative min-w-0 bg-elevated rounded border border-default">
     <!-- Link Overlay -->
-    <NuxtLink :to="`/res/${res.sfu}`" class="absolute top-0 left-0 w-full h-full z-10" />
+    <ResourceLink :id="res.sfu" :type="res.type" class="absolute top-0 left-0 w-full h-full z-50" />
 
     <!-- Image -->
-    <div class="w-full rounded overflow-hidden aspect-video relative pointer-events-none">
-      <NuxtImg
-        :src="`/map/${res.id}/images/yt-thumbnail.jpg`"
-        :key="res.id + 'img'"
-        :alt="res.name"
-        :width="250"
-        class="w-full object-cover scale-125 h-full z-1 aspect-video"
-        provider="cdn"
-        placeholder="/img/fallback.webp"
-      />
-      <Transition name="fade">
+    <div class="w-full rounded-lg overflow-hidden aspect-video relative pointer-events-none">
+      <ResourceThumbnail :id="res.id" :width="250" class="w-full object-cover scale-125 h-full z-1 aspect-video" />
+      <Transition name="fade" v-if="res.videoID">
         <LazyNuxtImg
-          :src="`/map/${res.id}/images/yt-preview.webp`"
+          :src="`/media/${res.id}/images/yt-preview.webp`"
           :key="res.id + 'anim'"
           :alt="res.name"
           class="w-full h-full object-cover transition-all absolute top-0 left-0 z-20 scale-175"

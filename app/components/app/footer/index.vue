@@ -4,9 +4,12 @@ const config = useRuntimeConfig();
 <template>
   <UFooter>
     <template #left>
-      <div class="flex flex-col">
-        <p class="text-sm text-muted">mtavault.com • © {{ new Date().getFullYear() }}</p>
-        <span class="font-mono text-muted text-xs"> {{ config.public.GIT_BRANCH }}.{{ config.public.GIT_COMMIT }}.{{ config.public.GIT_DATE }}</span>
+      <div class="flex gap-4 items-center">
+        <img src="/img/logo.webp" class="w-16" />
+        <div class="flex flex-col">
+          <p class="text-sm text-muted">mtavault.com • © {{ new Date().getFullYear() }}</p>
+          <span class="font-mono text-muted text-xs"> {{ config.public.GIT_BRANCH }}.{{ config.public.GIT_COMMIT }}.{{ config.public.GIT_DATE }}</span>
+        </div>
       </div>
     </template>
 

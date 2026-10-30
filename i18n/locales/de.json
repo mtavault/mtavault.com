@@ -14,7 +14,19 @@
     "discover": {
       "hero": {
         "title": "mtavault",
-        "description": "teile Multi Theft Auto: San Andreas maps einfacher denn je."
+        "description": "teile Multi Theft Auto: San Andreas maps einfacher denn je.",
+        "browse": "Entdecke",
+        "share": "Teile deine Kreation",
+        "features": {
+          "safe": {
+            "title": "Sicher & Verifiziert",
+            "description": "Curated, quality resources"
+          },
+          "up-to-date": {
+            "title": "Auf dem neuesten Stand",
+            "description": "Immer der neueste scheiß verfügbar"
+          }
+        }
       },
       "headers": {
         "latest": {

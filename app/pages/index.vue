@@ -62,6 +62,14 @@ watch(
     </UContainer>
   </div> -->
   <UContainer class="p-4">
+    <!-- <div class="flex items-center flex-col gap-2">
+      <div class="flex items-center gap-4">
+        <h2 class="font-bold">mtavault</h2>
+        <USeparator orientation="vertical" class="h-8" />
+        <p>2.497 resources</p>
+      </div>
+      <h5 class="text-muted">Discover, share and download the best Multi Theft Auto: San Andreas maps, resources and assets.</h5>
+    </div> -->
     <div class="flex flex-col gap-16 my-16">
       <PageDiscoverResourceShelf sort-variant="latest" resource-variant="map" />
       <PageDiscoverResourceShelf sort-variant="popular" resource-variant="map" />

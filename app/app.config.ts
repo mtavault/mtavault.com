@@ -3,7 +3,7 @@ const variant = 'soft';
 export default defineAppConfig({
   ui: {
     colors: {
-      primary: 'clay',
+      primary: 'periwinkle',
       secondary: 'blue',
       success: 'green',
       info: 'blue',
@@ -34,6 +34,15 @@ export default defineAppConfig({
     button: {
       defaultVariants: {
         variant,
+      },
+      variants: {
+        size: {
+          xxl: {
+            base: 'px-6 py-3.5 text-lg gap-2.5 rounded-lg',
+            leadingIcon: 'size-6',
+            trailingIcon: 'size-6',
+          },
+        },
       },
     },
     input: {
