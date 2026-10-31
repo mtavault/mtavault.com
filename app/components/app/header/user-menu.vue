@@ -2,6 +2,7 @@
 import type { DropdownMenuItem } from '@nuxt/ui';
 
 const { $api } = useNuxtApp();
+const { t } = useI18n();
 const route = useRoute();
 const config = useRuntimeConfig().public;
 const { ready, loggedIn, user } = useUserSession();
@@ -69,7 +70,7 @@ const items = ref<DropdownMenuItem[][]>([
 </script>
 <template>
   <div class="flex items-center gap-4">
-    <UButton label="Login with Discord" icon="fab:discord" variant="solid" @click="open" v-if="ready && !loggedIn" />
+    <UButton :label="t('common.discordLogin')" icon="fab:discord" variant="solid" @click="open" v-if="ready && !loggedIn" />
     <template v-if="loggedIn"> </template>
     <UDropdownMenu :items="items" v-if="loggedIn">
       <UButton color="neutral" variant="ghost">

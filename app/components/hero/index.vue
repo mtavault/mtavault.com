@@ -5,7 +5,7 @@ const { t } = useI18n();
 const { data } = await useLazyAsyncData<Number>('resource-count', () => $api('resource/count'));
 </script>
 <template>
-  <div class="relative isolate min-h-96 flex items-center py-16">
+  <div class="relative isolate min-h-96 flex max-md:flex-col items-center py-16">
     <div class="absolute inset-0 -z-20 bg-cover bg-center blur-xs" style="background-image: url('/img/hero.webp'); mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1), transparent 100%)" />
 
     <UContainer class="grid grid-cols-12">

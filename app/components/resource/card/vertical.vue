@@ -3,6 +3,8 @@ const props = defineProps<{
   res: any;
 }>();
 
+const { t } = useI18n();
+
 const wrapper = useTemplateRef('wrapper');
 const isHovered = useElementHover(wrapper);
 </script>
@@ -98,7 +100,7 @@ const isHovered = useElementHover(wrapper);
               <USeparator type="dashed" />
               <!-- Buttons -->
               <div class="flex justify-end gap-4 z-60">
-                <UButton label="Download" color="primary" icon="fas:download" size="sm" />
+                <UButton :label="t('common.download')" color="primary" icon="fas:download" size="sm" />
               </div>
             </div>
           </div>

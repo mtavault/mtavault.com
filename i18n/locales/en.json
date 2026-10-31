@@ -10,6 +10,12 @@
     }
   },
 
+  "common": {
+    "by": "by",
+    "download": "Download",
+    "discordLogin": "Login with Discord"
+  },
+
   "pages": {
     "discover": {
       "hero": {

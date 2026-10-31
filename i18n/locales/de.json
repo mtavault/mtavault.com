@@ -10,6 +10,12 @@
     }
   },
 
+  "common": {
+    "by": "von",
+    "download": "Herunterladen",
+    "discordLogin": "Mit Discord Anmelden"
+  },
+
   "pages": {
     "discover": {
       "hero": {
