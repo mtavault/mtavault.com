@@ -14,6 +14,9 @@ export default defineNuxtConfig({
     '/res/**': {
       // swr: true,
     },
+    '/login/oauth2': {
+      ssr: false,
+    },
   },
 
   i18n: {
@@ -27,8 +30,8 @@ export default defineNuxtConfig({
     },
     strategy: 'no_prefix',
     locales: [
-      { code: 'en', name: 'English', file: 'en.json' },
-      { code: 'de', name: 'German', file: 'de.json' },
+      { code: 'GB', name: 'English', file: 'en.json' },
+      { code: 'DE', name: 'German', file: 'de.json' },
     ],
   },
 
@@ -45,6 +48,7 @@ export default defineNuxtConfig({
       GIT_BRANCH: 'dev',
       GIT_DATE: '0000-01-01 00:00:00 +0000',
 
+      discordClientID: '',
       api: '',
       cdn: '',
     },

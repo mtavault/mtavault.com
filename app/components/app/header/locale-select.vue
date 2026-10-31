@@ -1,9 +1,27 @@
 <script lang="ts" setup>
-import * as _locales from '@nuxt/ui/locale';
+import type { DropdownMenuItem } from '@nuxt/ui';
+
 const { t, locale, locales, setLocale } = useI18n();
 
-const filteredLocales = Object.values(_locales).filter((x) => locales.value.some((y) => y.code === x.code));
+const dropdownItems = computed<DropdownMenuItem>(() => {
+  return locales.value.map((loc) => {
+    return {
+      label: loc.name,
+      code: loc.code,
+      onSelect: () => {
+        setLocale(loc.code);
+      },
+    };
+  });
+});
 </script>
 <template>
-  <ULocaleSelect :model-value="locale" @update:model-value="setLocale($event)" :locales="filteredLocales" :search-input="{ placeholder: t('input.placeholders.search') }" />
+  <UDropdownMenu :items="dropdownItems">
+    <UButton color="neutral" variant="ghost">
+      <Flag :code="locale" />
+    </UButton>
+    <template #item-leading="{ item }">
+      <Flag :code="item.code" />
+    </template>
+  </UDropdownMenu>
 </template>

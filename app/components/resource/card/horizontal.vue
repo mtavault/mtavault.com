@@ -23,7 +23,7 @@ const isHovered = useElementHover(wrapper);
             <template v-for="(author, index) in res.authors">
               <template v-if="index !== 0 && index < res.authors.length - 1">,&nbsp;</template>
               <template v-else-if="index !== 0 && index === res.authors.length - 1">&nbsp;&&nbsp;</template>
-              <ULink to="#" class="z-60">{{ author.name }}</ULink>
+              <ResourceAuthor :author="author" class="z-60" />
             </template>
           </p>
         </div>

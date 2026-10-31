@@ -3,6 +3,17 @@ const route = useRoute();
 const { $api } = useNuxtApp();
 
 const { data, refresh, error } = await useAsyncData(`resource-${route.params.id}`, () => $api(`/resource/${route.params.id}`));
+
+if (error.value || !data.value) {
+  throw createError({
+    statusCode: 404,
+    statusMessage: 'Map not found',
+  });
+}
+
+useSeoMeta({
+  title: data.value.name,
+});
 </script>
 <template>
   <UContainer>
@@ -23,7 +34,7 @@ const { data, refresh, error } = await useAsyncData(`resource-${route.params.id}
                 <template v-for="(author, index) in data.authors">
                   <template v-if="index !== 0 && index < data.authors.length - 1">,&nbsp;</template>
                   <template v-else-if="index !== 0 && index === data.authors.length - 1">&nbsp;&&nbsp;</template>
-                  <ULink to="#" class="z-60">{{ author.name }}</ULink>
+                  <ResourceAuthor :author="author" class="z-60" />
                 </template>
               </p>
             </div>
