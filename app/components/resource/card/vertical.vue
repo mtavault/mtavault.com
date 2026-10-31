@@ -20,7 +20,7 @@ const isHovered = useElementHover(wrapper);
     <!-- Actual Card -->
     <div
       ref="wrapper"
-      class="group absolute inset-0 z-0 h-fit overflow-hidden rounded-lg bg-elevated border border-default shadow-md transition-all hover:z-50 hover:scale-105 hover:-translate-y-20 origin-top hover:shadow-2xl shadow-black"
+      class="group absolute inset-0 z-0 h-fit overflow-hidden rounded-lg bg-elevated border border-default shadow-md transition-all hover:z-50 hover:scale-105 hover:-translate-y-20 origin-top hover:shadow-xl shadow-neutral-950 hover:shadow-black"
     >
       <!-- Link Overlay -->
       <ResourceLink :id="res.sfu" :type="res.type" class="absolute top-0 left-0 w-full h-full z-50" />
@@ -73,7 +73,7 @@ const isHovered = useElementHover(wrapper);
                 </div>
                 <div class="flex items-center gap-2 bg-accented px-2 py-1 rounded-lg">
                   <UIcon name="fas:hearts" class="text-red-400" />
-                  <p>{{ res.ratingTotal || '-' }}</p>
+                  <p>{{ res.favs?.length || 0 }}</p>
                 </div>
                 <div class="flex items-center gap-2 bg-accented px-2 py-1 rounded-lg">
                   <UIcon name="fas:award" class="text-yellow-400" />

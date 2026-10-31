@@ -36,7 +36,7 @@ const isHovered = useElementHover(wrapper);
             </div>
             <div class="flex items-center gap-2 bg-accented px-2 py-1 rounded-lg">
               <UIcon name="fas:hearts" class="text-red-400" />
-              <p>{{ res.ratingTotal || '-' }}</p>
+              <p>{{ res.favs?.length || 0 }}</p>
             </div>
             <div class="flex items-center gap-2 bg-accented px-2 py-1 rounded-lg">
               <UIcon name="fas:award" class="text-yellow-400" />

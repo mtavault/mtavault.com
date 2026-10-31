@@ -25,6 +25,7 @@ const navItems = computed(() => [
 
     <template #right>
       <AppHeaderLocaleSelect />
+      <AppHeaderUserMenu />
     </template>
   </UHeader>
 </template>
