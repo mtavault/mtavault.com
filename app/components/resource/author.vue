@@ -4,6 +4,8 @@ const props = defineProps<{
 }>();
 </script>
 <template>
-  <UUser :to="`#`" :name="author.name" :avatar="{ src: `/media/.avatars/${author.userId}.webp`, provider: 'cdn' }" class="inline-flex align-middle gap-1" size="sm" v-if="author.userId" />
-  <UUser :to="`#`" :name="author.name" class="inline-flex align-middle gap-0!" size="sm" v-else />
+  <ULink raw :to="`#`" class="inline-flex items-center gap-0.5 align-middle text-primary hover:text-primary-400 transition-colors">
+    <UAvatar :src="`/media/.avatars/${author.userId}.webp`" size="xs" provider="cdn" v-if="author.userId" />
+    <span>{{ author.name }}</span>
+  </ULink>
 </template>
