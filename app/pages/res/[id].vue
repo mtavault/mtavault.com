@@ -11,8 +11,28 @@ if (error.value || !data.value) {
   });
 }
 
+const seoTitle = `${data.value.name}`;
+// const seoImage = (map.value.videoID?.length ? $image(`/yt-proxy/${map.value.videoURL}/hqdefault.jpg?f=webp&width=320&height=180`) : undefined)
+const seoVideo = data.value.videoID?.length ? `https://www.youtube.com/embed/${data.value.videoID}` : undefined;
+
 useSeoMeta({
-  title: data.value.name,
+  title: seoTitle,
+
+  ogSiteName: 'mtavault.com » Map',
+  ogTitle: seoTitle,
+  twitterTitle: seoTitle,
+
+  articlePublishedTime: data.value?.createdAt,
+  articleModifiedTime: data.value?.updatedAt,
+
+  ogType: 'video.other',
+  ogVideo: {
+    url: seoVideo,
+    secureUrl: seoVideo,
+    width: 1280,
+    height: 720,
+    type: 'text/html',
+  },
 });
 </script>
 <template>
