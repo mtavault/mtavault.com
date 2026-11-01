@@ -76,18 +76,7 @@ useSeoMeta({
               </div>
               <div class="flex items-center gap-2 bg-accented px-2 py-1 rounded-lg">
                 <UIcon name="fas:calendar-days" class="text-secondary" />
-                <p>
-                  {{
-                    useTimeAgo(data.createdAt, {
-                      max: 'day',
-                      fullDateFormatter: (date) => {
-                        return new Intl.DateTimeFormat(localeProperties.language, {
-                          dateStyle: 'medium',
-                        }).format(date);
-                      },
-                    })
-                  }}
-                </p>
+                <i18n-d :value="data.createdAt" format="medium" />
               </div>
             </div>
           </div>

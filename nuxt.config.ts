@@ -1,6 +1,7 @@
 import * as fas from '@fortawesome/pro-solid-svg-icons';
 import * as fab from '@fortawesome/free-brands-svg-icons';
 import tailwindcss from '@tailwindcss/vite';
+import { i18nNuxtConfig } from './i18n/nuxt.config';
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
@@ -19,21 +20,7 @@ export default defineNuxtConfig({
     },
   },
 
-  i18n: {
-    defaultLocale: 'en',
-    detectBrowserLanguage: {
-      alwaysRedirect: true,
-
-      redirectOn: 'all',
-      fallbackLocale: 'gb',
-      cookieKey: 'mtavault-lang',
-    },
-    strategy: 'no_prefix',
-    locales: [
-      { code: 'gb', name: 'English', file: 'english.json', language: 'en-US' },
-      { code: 'de', name: 'German', file: 'german.json', language: 'de-DE' },
-    ],
-  },
+  ...i18nNuxtConfig,
 
   fonts: {
     families: [
