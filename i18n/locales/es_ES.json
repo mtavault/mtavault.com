@@ -1,0 +1,49 @@
+{
+  "navigation": {
+    "home": "Discover",
+    "search": "Browse All"
+  },
+  "input": {
+    "placeholders": {
+      "search": "Search..."
+    }
+  },
+  "common": {
+    "by": "by",
+    "viewAll": "View All",
+    "download": "Download",
+    "discordLogin": "Login with Discord"
+  },
+  "pages": {
+    "discover": {
+      "hero": {
+        "title": "mtavault",
+        "description": "Discover, share and download the best Multi Theft Auto: San Andreas maps, resources and models.",
+        "browse": "Browse",
+        "share": "Share Your Creation",
+        "features": {
+          "safe": {
+            "title": "Safe & Verified",
+            "description": "Curated, quality resources"
+          },
+          "up-to-date": {
+            "title": "Up To Date",
+            "description": "Always the newest shit available"
+          }
+        }
+      },
+      "headers": {
+        "latest": {
+          "map": "Latest Maps",
+          "model": "Latest Models",
+          "resource": "Latest Resources"
+        },
+        "popular": {
+          "map": "Popular Maps",
+          "model": "Popular Models",
+          "resource": "Popular Resources"
+        }
+      }
+    }
+  }
+}
