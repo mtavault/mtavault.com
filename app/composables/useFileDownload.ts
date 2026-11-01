@@ -12,8 +12,7 @@ export const useFileDownload = () => {
     error.value = null;
 
     try {
-      const url = new URL(`/map/${id}`, config.cdn);
-      const response = await fetch(url.href);
+      const response = await fetch(`${config.cdn}/map/${id}`);
       if (!response.ok) {
         throw new Error(`Download failed: ${response.status}`);
       }
