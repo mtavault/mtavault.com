@@ -1,33 +1,30 @@
 {
   "navigation": {
-    "home": "Startseite",
+    "home": "Entdecken",
     "search": "Alle Durchstöbern"
   },
-
   "input": {
     "placeholders": {
       "search": "Suchen..."
     }
   },
-
   "common": {
     "by": "von",
-    "viewAll": "Alle Ansehen",
+    "viewAll": "Alle Anzeigen",
     "download": "Herunterladen",
     "discordLogin": "Mit Discord Anmelden"
   },
-
   "pages": {
     "discover": {
       "hero": {
         "title": "mtavault",
-        "description": "teile Multi Theft Auto: San Andreas maps einfacher denn je.",
-        "browse": "Entdecke",
+        "description": "Entdecke die besten Multi Theft Auto: San Andreas Maps, Resourcen und Modelle.",
+        "browse": "Durchsuchen",
         "share": "Teile deine Kreation",
         "features": {
           "safe": {
             "title": "Sicher & Verifiziert",
-            "description": "Curated, quality resources"
+            "description": "Kuratierte Resourcen"
           },
           "up-to-date": {
             "title": "Auf dem neuesten Stand",
