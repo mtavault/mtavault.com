@@ -45,6 +45,11 @@ export default defineAppConfig({
         },
       },
     },
+    card: {
+      defaultVariants: {
+        variant: 'soft',
+      },
+    },
     input: {
       defaultVariants: {
         variant,

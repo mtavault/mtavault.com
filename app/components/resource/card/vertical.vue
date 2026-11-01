@@ -89,7 +89,7 @@ const isHovered = useElementHover(wrapper);
               <USeparator type="dashed" />
               <!-- Buttons -->
               <div class="flex justify-end gap-4 z-60">
-                <UButton :label="t('common.download')" color="primary" icon="fas:download" size="sm" />
+                <UButton :label="t('common.download')" color="primary" icon="fas:download" variant="solid" size="sm" />
               </div>
             </div>
           </div>

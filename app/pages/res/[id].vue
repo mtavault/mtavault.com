@@ -2,6 +2,7 @@
 const route = useRoute();
 const { t, localeProperties } = useI18n();
 const { $api } = useNuxtApp();
+const { user, loggedIn } = useUserSession();
 
 const { data, refresh, error } = await useAsyncData(`resource-${route.params.id}`, () => $api(`/resource/${route.params.id}`));
 
@@ -35,6 +36,14 @@ useSeoMeta({
     type: 'text/html',
   },
 });
+
+const isFavorited = computed(() => {
+  return loggedIn.value && data.value.favs.some((x) => x.userId === user.value.id);
+});
+const fav = async () => {
+  await $api(`/resource/${data.value.id}/fav`, { method: 'PATCH' });
+  await refresh();
+};
 </script>
 <template>
   <UContainer>
@@ -96,7 +105,23 @@ useSeoMeta({
         <Youtube :id="data.videoID" class="aspect-video w-full rounded-lg border border-default" v-if="data.videoID" />
       </div>
       <UPageAside class="lg:col-span-3 md:p-4">
-        <UCard>allo</UCard>
+        <div class="flex flex-col gap-4">
+          <UCard>
+            <div class="flex flex-col gap-8">
+              <UFieldGroup>
+                <UButton :label="t('common.download')" icon="fas:download" class="w-full justify-center" size="xl" variant="solid" />
+                <UButton :label="data.favs?.length" color="neutral" size="xl" @click="fav" loading-auto>
+                  <template #trailing>
+                    <UIcon name="fas:hearts" class="size-5 transition-colors" :class="[isFavorited ? 'text-red-400' : 'text-muted']" />
+                  </template>
+                </UButton>
+              </UFieldGroup>
+
+              <USeparator />
+              allo
+            </div>
+          </UCard>
+        </div>
       </UPageAside>
     </div>
   </UContainer>
