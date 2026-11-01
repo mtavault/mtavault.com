@@ -1,13 +1,13 @@
 <script lang="ts" setup>
 import type { DropdownMenuItem } from '@nuxt/ui';
 
-const { t, locale, locales, setLocale } = useI18n();
+const { t, locale, localeProperties, locales, setLocale } = useI18n();
 
 const dropdownItems = computed<DropdownMenuItem>(() => {
   return locales.value.map((loc) => {
     return {
       label: loc.name,
-      code: loc.code,
+      flag: loc.flag,
       onSelect: () => {
         setLocale(loc.code);
       },
@@ -18,10 +18,10 @@ const dropdownItems = computed<DropdownMenuItem>(() => {
 <template>
   <UDropdownMenu :items="dropdownItems">
     <UButton color="neutral" variant="ghost">
-      <Flag :code="locale" />
+      <Flag :code="localeProperties.flag" />
     </UButton>
     <template #item-leading="{ item }">
-      <Flag :code="item.code" />
+      <Flag :code="item.flag" />
     </template>
   </UDropdownMenu>
 </template>
