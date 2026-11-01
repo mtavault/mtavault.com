@@ -25,13 +25,13 @@ export default defineNuxtConfig({
       alwaysRedirect: true,
 
       redirectOn: 'all',
-      fallbackLocale: 'en',
+      fallbackLocale: 'gb',
       cookieKey: 'mtavault-lang',
     },
     strategy: 'no_prefix',
     locales: [
-      { code: 'GB', name: 'English', file: 'en.json' },
-      { code: 'DE', name: 'German', file: 'de.json' },
+      { code: 'gb', name: 'English', file: 'english.json', language: 'en-US' },
+      { code: 'de', name: 'German', file: 'german.json', language: 'de-DE' },
     ],
   },
 

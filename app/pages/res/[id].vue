@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 const route = useRoute();
+const { t, localeProperties } = useI18n();
 const { $api } = useNuxtApp();
 
 const { data, refresh, error } = await useAsyncData(`resource-${route.params.id}`, () => $api(`/resource/${route.params.id}`));
@@ -49,14 +50,14 @@ useSeoMeta({
           <div class="flex flex-col justify-between">
             <div class="flex flex-col">
               <h4 class="text-highlighted">{{ data.name }}</h4>
-              <p class="text-sm text-muted z-60">
-                by
+              <div class="text-sm text-muted z-60 flex items-center gap-1">
+                <i18n-t keypath="common.by" />
                 <template v-for="(author, index) in data.authors">
                   <template v-if="index !== 0 && index < data.authors.length - 1">,&nbsp;</template>
                   <template v-else-if="index !== 0 && index === data.authors.length - 1">&nbsp;&&nbsp;</template>
                   <ResourceAuthor :author="author" class="z-60" />
                 </template>
-              </p>
+              </div>
             </div>
 
             <!-- Info -->
@@ -80,7 +81,7 @@ useSeoMeta({
                     useTimeAgo(data.createdAt, {
                       max: 'day',
                       fullDateFormatter: (date) => {
-                        return new Intl.DateTimeFormat('en-US', {
+                        return new Intl.DateTimeFormat(localeProperties.language, {
                           dateStyle: 'medium',
                         }).format(date);
                       },

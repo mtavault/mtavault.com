@@ -3,6 +3,8 @@ const props = defineProps<{
   res: any;
 }>();
 
+const { t, localeProperties } = useI18n();
+
 const wrapper = useTemplateRef('wrapper');
 const isHovered = useElementHover(wrapper);
 </script>
@@ -18,14 +20,14 @@ const isHovered = useElementHover(wrapper);
       <div class="flex flex-col justify-between">
         <div class="flex flex-col">
           <h4 class="text-highlighted">{{ res.name }}</h4>
-          <p class="text-sm text-muted z-60">
-            by
+          <div class="text-sm text-muted z-60 flex items-center gap-1">
+            <i18n-t keypath="common.by" />
             <template v-for="(author, index) in res.authors">
               <template v-if="index !== 0 && index < res.authors.length - 1">,&nbsp;</template>
               <template v-else-if="index !== 0 && index === res.authors.length - 1">&nbsp;&&nbsp;</template>
               <ResourceAuthor :author="author" class="z-60" />
             </template>
-          </p>
+          </div>
         </div>
 
         <div class="flex flex-col">
@@ -49,7 +51,7 @@ const isHovered = useElementHover(wrapper);
                   useTimeAgo(res.createdAt, {
                     max: 'day',
                     fullDateFormatter: (date) => {
-                      return new Intl.DateTimeFormat('en-US', {
+                      return new Intl.DateTimeFormat(localeProperties.language, {
                         dateStyle: 'medium',
                       }).format(date);
                     },

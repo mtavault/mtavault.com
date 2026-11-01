@@ -22,7 +22,7 @@ const pageItems = computed(() => {
       <div class="flex items-center gap-4">
         <div class="w-8 h-1 rounded-full bg-primary" />
         <h4>{{ t(`pages.discover.headers.${sortVariant}.${resourceVariant}`) }}</h4>
-        <UButton label="View All" :to="`search?variant=${resourceVariant}&sortBy=${sortVariant}`" color="neutral" />
+        <UButton :label="t('common.viewAll')" :to="`search?variant=${resourceVariant}&sortBy=${sortVariant}`" color="neutral" />
       </div>
       <UPagination v-model:page="page" :items-per-page="4" :total="data?.length || 0" size="sm" variant="soft" :ui="{ root: 'max-md:hidden' }">
         <template #item><div /></template>

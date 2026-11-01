@@ -3,6 +3,8 @@ const props = defineProps<{
   res: any;
 }>();
 
+const { t } = useI18n();
+
 const wrapper = useTemplateRef('wrapper');
 const isHovered = useElementHover(wrapper);
 </script>
@@ -29,14 +31,14 @@ const isHovered = useElementHover(wrapper);
 
     <div class="absolute bottom-0 w-full flex flex-col p-2 bg-linear-to-b from-transparent to-default">
       <h3 class="font-bold text-highlighted">{{ res.name }}</h3>
-      <p class="text-sm text-muted">
-        by
+      <div class="text-sm text-muted z-60 flex items-center gap-1">
+        <i18n-t keypath="common.by" />
         <template v-for="(author, index) in res.authors">
           <template v-if="index !== 0 && index < res.authors.length - 1">,&nbsp;</template>
           <template v-else-if="index !== 0 && index === res.authors.length - 1">&nbsp;&&nbsp;</template>
           <ResourceAuthor :author="author" class="z-60" />
         </template>
-      </p>
+      </div>
     </div>
   </div>
 </template>

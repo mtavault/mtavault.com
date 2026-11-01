@@ -12,6 +12,7 @@
 
   "common": {
     "by": "von",
+    "viewAll": "Alle Ansehen",
     "download": "Herunterladen",
     "discordLogin": "Mit Discord Anmelden"
   },
