@@ -2,6 +2,7 @@
 const route = useRoute();
 const { t, localeProperties } = useI18n();
 const { $api } = useNuxtApp();
+const img = useImage();
 const { user, loggedIn } = useUserSession();
 
 const { data, refresh, error } = await useAsyncData(`resource-${route.params.id}`, () => $api(`/resource/${route.params.id}`));
@@ -13,28 +14,35 @@ if (error.value || !data.value) {
   });
 }
 
-const seoTitle = `${data.value.name}`;
-// const seoImage = (map.value.videoID?.length ? $image(`/yt-proxy/${map.value.videoURL}/hqdefault.jpg?f=webp&width=320&height=180`) : undefined)
-const seoVideo = data.value.videoID?.length ? `https://www.youtube.com/embed/${data.value.videoID}` : undefined;
+const seo = {
+  title: data.value.name,
+  description: `by ${new Intl.ListFormat('en', { style: 'short' }).format(data.value.authors.map((x) => x.name))}`,
+  image: data.value.videoID ? img(`/media/${data.value.id}/images/yt-preview.webp`, {}, { provider: 'cdn' }) : undefined,
+  imageAlt: data.value.videoID ? img(`/media/${data.value.id}/images/yt-thumbnail.jpg`, {}, { provider: 'cdn' }) : undefined,
+  video: data.value.videoID ? `https://www.youtube.com/embed/${data.value.videoID}` : undefined,
+};
 
 useSeoMeta({
-  title: seoTitle,
-
   ogSiteName: 'mtavault.com » Map',
-  ogTitle: seoTitle,
-  twitterTitle: seoTitle,
+  title: seo.title,
+  ogTitle: seo.title,
+  twitterTitle: seo.title,
+
+  description: seo.description,
+  ogDescription: seo.description,
+
+  ogImage: seo.image,
+  ogImageAlt: seo.imageAlt,
 
   articlePublishedTime: data.value?.createdAt,
   articleModifiedTime: data.value?.updatedAt,
 
   ogType: 'video.other',
-  ogVideo: {
-    url: seoVideo,
-    secureUrl: seoVideo,
-    width: 1280,
-    height: 720,
-    type: 'text/html',
-  },
+  ogVideoSecureUrl: seo.video,
+  ogVideoUrl: seo.video,
+  ogVideo: seo.video,
+  ogVideoWidth: 1280,
+  ogVideoHeight: 720,
 });
 
 const isFavorited = computed(() => {
