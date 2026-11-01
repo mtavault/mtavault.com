@@ -14,6 +14,9 @@ const config = useRuntimeConfig();
     </template>
 
     <template #right>
+      <UButton to="https://www.paypal.me/dnlk" target="_blank" icon="fab:paypal" label="Support Me" aria-label="PayPal" color="neutral" variant="ghost" />
+      <UButton to="https://crowdin.com/project/mtavault" target="_blank" icon="fas:language" label="Help Translating" aria-label="Crowdin" color="neutral" variant="ghost" />
+      <UButton to="https://discord.gg/WeUrNhG" target="_blank" icon="fab:discord" aria-label="Discord" color="neutral" variant="ghost" />
       <UButton to="https://github.com/mtavault/" target="_blank" icon="fab:github" aria-label="GitHub" color="neutral" variant="ghost" />
     </template>
   </UFooter>

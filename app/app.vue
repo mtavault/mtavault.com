@@ -1,4 +1,5 @@
 <script setup>
+import { useCssVar } from '@vueuse/core';
 const title = 'mtavault';
 const description = 'Map sharing platform for Multi Theft Auto: San Andreas.';
 
@@ -18,6 +19,7 @@ useSeoMeta({
   ogImage: '/img/logo-icon.webp',
   ogDescription: description,
   twitterCard: 'summary_large_image',
+  themeColor: useCssVar('--color-primary'),
 });
 </script>
 

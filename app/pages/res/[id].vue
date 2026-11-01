@@ -52,6 +52,8 @@ const fav = async () => {
   await $api(`/resource/${data.value.id}/fav`, { method: 'PATCH' });
   await refresh();
 };
+
+const { downloadFile, progress } = useFileDownload();
 </script>
 <template>
   <UContainer>
@@ -117,8 +119,8 @@ const fav = async () => {
           <UCard>
             <div class="flex flex-col gap-8">
               <UFieldGroup>
-                <UButton :label="t('common.download')" icon="fas:download" class="w-full justify-center" size="xl" variant="solid" />
-                <UButton :label="data.favs?.length" color="neutral" size="xl" @click="fav" loading-auto>
+                <UButton :label="t('common.download')" icon="fas:download" class="w-full justify-center" size="xl" variant="solid" @click="downloadFile(data.id, data.fileName)" />
+                <UButton :label="data.favs?.length" color="neutral" size="xl" @click="fav">
                   <template #trailing>
                     <UIcon name="fas:hearts" class="size-5 transition-colors" :class="[isFavorited ? 'text-red-400' : 'text-muted']" />
                   </template>
@@ -126,7 +128,7 @@ const fav = async () => {
               </UFieldGroup>
 
               <USeparator />
-              allo
+              {{ progress }}%
             </div>
           </UCard>
         </div>
