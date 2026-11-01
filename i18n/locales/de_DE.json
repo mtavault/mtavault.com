@@ -1,50 +1,47 @@
 {
   "navigation": {
-    "home": "Startseite",
-    "search": "Alle Durchstöbern"
+    "home": "Discover",
+    "search": "Browse All"
   },
-
   "input": {
     "placeholders": {
-      "search": "Suchen..."
+      "search": "Search..."
     }
   },
-
   "common": {
-    "by": "von",
-    "viewAll": "Alle Ansehen",
-    "download": "Herunterladen",
-    "discordLogin": "Mit Discord Anmelden"
+    "by": "by",
+    "viewAll": "View All",
+    "download": "Download",
+    "discordLogin": "Login with Discord"
   },
-
   "pages": {
     "discover": {
       "hero": {
         "title": "mtavault",
-        "description": "teile Multi Theft Auto: San Andreas maps einfacher denn je.",
-        "browse": "Entdecke",
-        "share": "Teile deine Kreation",
+        "description": "Discover, share and download the best Multi Theft Auto: San Andreas maps, resources and models.",
+        "browse": "Browse",
+        "share": "Share Your Creation",
         "features": {
           "safe": {
-            "title": "Sicher & Verifiziert",
+            "title": "Safe & Verified",
             "description": "Curated, quality resources"
           },
           "up-to-date": {
-            "title": "Auf dem neuesten Stand",
-            "description": "Immer der neueste scheiß verfügbar"
+            "title": "Up To Date",
+            "description": "Always the newest shit available"
           }
         }
       },
       "headers": {
         "latest": {
-          "map": "Neueste Maps",
-          "model": "Neueste Modelle",
-          "resource": "Neueste Resourcen"
+          "map": "Latest Maps",
+          "model": "Latest Models",
+          "resource": "Latest Resources"
         },
         "popular": {
-          "map": "Beliebte Maps",
-          "model": "Beliebte Modelle",
-          "resource": "Beliebte Resourcen"
+          "map": "Popular Maps",
+          "model": "Popular Models",
+          "resource": "Popular Resources"
         }
       }
     }
