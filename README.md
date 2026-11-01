@@ -1,3 +1,5 @@
+[![Crowdin](https://badges.crowdin.net/mtavault/localized.svg)](https://crowdin.com/project/mtavault)
+
 # mtavault: website
 
 mtavault.com using Nuxt, Nuxt UI and TailwindCSS
