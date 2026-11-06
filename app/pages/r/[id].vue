@@ -4,6 +4,8 @@ const { t, localeProperties } = useI18n();
 const { $api } = useNuxtApp();
 const img = useImage();
 const { user, loggedIn } = useUserSession();
+const toast = useToast();
+const { downloadFile, progress, completed, error: downloadError, downloading } = useFileDownload();
 
 const { data, refresh, error } = await useAsyncData(`resource-${route.params.id}`, () => $api(`/resource/${route.params.id}`));
 
@@ -17,8 +19,8 @@ if (error.value || !data.value) {
 const seo = {
   title: data.value.name,
   description: `by ${new Intl.ListFormat('en', { style: 'short' }).format(data.value.authors.map((x) => x.name))}`,
-  image: data.value.videoID ? img(`/media/${data.value.id}/images/yt-preview.webp`, {}, { provider: 'cdn' }) : undefined,
-  imageAlt: data.value.videoID ? img(`/media/${data.value.id}/images/yt-thumbnail.jpg`, {}, { provider: 'cdn' }) : undefined,
+  image: data.value.videoID ? img(`/${data.value.id}/images/yt-preview.webp`, {}, { provider: 'cdn' }) : undefined,
+  imageAlt: data.value.videoID ? img(`/${data.value.id}/images/yt-thumbnail.jpg`, {}, { provider: 'cdn' }) : undefined,
   video: data.value.videoID ? `https://www.youtube.com/embed/${data.value.videoID}` : undefined,
 };
 
@@ -48,12 +50,24 @@ useSeoMeta({
 const isFavorited = computed(() => {
   return loggedIn.value && data.value.favs.some((x) => x.userId === user.value.id);
 });
+
 const fav = async () => {
   await $api(`/resource/${data.value.id}/fav`, { method: 'PATCH' });
   await refresh();
 };
 
-const { downloadFile, progress } = useFileDownload();
+const downloadMap = async () => {
+  try {
+    await downloadFile(data.value.id, data.value.fileName);
+  } catch (err) {
+    toast.add({
+      color: 'error',
+      title: 'Download Failed',
+      description: downloadError.value || 'Unknown Error',
+      icon: 'fas:user-robot-xmarks',
+    });
+  }
+};
 </script>
 <template>
   <UContainer>
@@ -119,7 +133,15 @@ const { downloadFile, progress } = useFileDownload();
           <UCard>
             <div class="flex flex-col gap-8">
               <UFieldGroup>
-                <UButton :label="t('common.download')" icon="fas:download" class="w-full justify-center" size="xl" variant="solid" @click="downloadFile(data.id, data.fileName)" />
+                <UButton
+                  :label="t('common.download')"
+                  icon="fas:download"
+                  class="w-full justify-center"
+                  size="xl"
+                  variant="solid"
+                  @click="downloadMap"
+                  :disabled="downloading || downloadError?.length > 0"
+                />
                 <UButton :label="data.favs?.length" color="neutral" size="xl" @click="fav">
                   <template #trailing>
                     <UIcon name="fas:hearts" class="size-5 transition-colors" :class="[isFavorited ? 'text-red-400' : 'text-muted']" />
@@ -128,7 +150,6 @@ const { downloadFile, progress } = useFileDownload();
               </UFieldGroup>
 
               <USeparator />
-              {{ progress }}%
             </div>
           </UCard>
         </div>

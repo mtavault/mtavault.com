@@ -21,7 +21,7 @@ const { data } = await useLazyAsyncData<Number>('resource-count', () => $api('re
             </div>
 
             <!-- Buttons -->
-            <div class="flex items-center gap-8">
+            <div class="flex items-center gap-8 max-md:flex-col">
               <UButton :label="t('pages.discover.hero.browse')" to="/search" icon="fas:objects-column" trailing-icon="fas:arrow-right" variant="solid" size="xxl" />
               <UButton :label="t('pages.discover.hero.share')" icon="fas:cloud-arrow-up" variant="outline" size="xxl" />
             </div>

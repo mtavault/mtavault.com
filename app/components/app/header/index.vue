@@ -23,6 +23,10 @@ const navItems = computed(() => [
 
     <UNavigationMenu variant="pill" highlight :items="navItems" />
 
+    <template #body>
+      <UNavigationMenu orientation="vertical" :items="navItems" />
+    </template>
+
     <template #right>
       <AppHeaderLocaleSelect />
       <AppHeaderUserMenu />

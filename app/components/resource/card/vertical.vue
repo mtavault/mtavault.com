@@ -4,9 +4,24 @@ const props = defineProps<{
 }>();
 
 const { t, localeProperties } = useI18n();
+const toast = useToast();
+const { downloadFile, progress, completed, error: downloadError, downloading } = useFileDownload();
 
 const wrapper = useTemplateRef('wrapper');
 const isHovered = useElementHover(wrapper);
+
+const downloadMap = async () => {
+  try {
+    await downloadFile(props.res.id, props.res.fileName);
+  } catch (err) {
+    toast.add({
+      color: 'error',
+      title: 'Download Failed',
+      description: downloadError.value || 'Unknown Error',
+      icon: 'fas:user-robot-xmarks',
+    });
+  }
+};
 </script>
 <template>
   <div class="relative min-w-0">
@@ -32,7 +47,7 @@ const isHovered = useElementHover(wrapper);
         <ResourceThumbnail :id="res.id" :width="250" class="w-full object-cover scale-125 h-full z-1 aspect-video" />
         <Transition name="fade" v-if="res.videoID">
           <LazyNuxtImg
-            :src="`/media/${res.id}/images/yt-preview.webp`"
+            :src="`/${res.id}/images/yt-preview.webp`"
             :key="res.id + 'anim'"
             class="w-full h-full object-cover transition-all absolute top-0 left-0 z-20 scale-175"
             :class="{ 'scale-100!': isHovered }"
@@ -89,7 +104,7 @@ const isHovered = useElementHover(wrapper);
               <USeparator type="dashed" />
               <!-- Buttons -->
               <div class="flex justify-end gap-4 z-60">
-                <UButton :label="t('common.download')" color="primary" icon="fas:download" variant="solid" size="sm" />
+                <UButton :label="t('common.download')" color="primary" icon="fas:download" variant="solid" size="sm" @click="downloadMap" :disabled="downloading || downloadError?.length > 0" />
               </div>
             </div>
           </div>

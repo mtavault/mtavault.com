@@ -74,7 +74,7 @@ const items = ref<DropdownMenuItem[][]>([
     <template v-if="loggedIn"> </template>
     <UDropdownMenu :items="items" v-if="loggedIn">
       <UButton color="neutral" variant="ghost">
-        <UUser :name="user.username" :avatar="{ src: `/media/.avatars/${user.id}.webp`, provider: 'cdn' }" description="Role Description" />
+        <UUser :name="user.username" :avatar="{ src: `/.avatars/${user.id}.webp`, provider: 'cdn' }" :description="user?.role ? user.role.name : undefined" />
       </UButton>
     </UDropdownMenu>
   </div>

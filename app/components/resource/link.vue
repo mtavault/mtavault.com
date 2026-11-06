@@ -5,7 +5,7 @@ const props = defineProps<{
 }>();
 </script>
 <template>
-  <NuxtLink :to="`/res/${id}`">
+  <NuxtLink :to="`/r/${id}`">
     <slot />
   </NuxtLink>
 </template>

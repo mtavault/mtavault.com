@@ -12,9 +12,9 @@ export const useFileDownload = () => {
     error.value = null;
 
     try {
-      const response = await fetch(`${config.cdn}/map/${id}`);
+      const response = await fetch(`${config.api}/resource/${id}/download`);
       if (!response.ok) {
-        throw new Error(`Download failed: ${response.status}`);
+        throw new Error(`${response.statusText} (code:${response.status})`);
       }
 
       const contentLength = response.headers.get('content-length');
@@ -59,7 +59,8 @@ export const useFileDownload = () => {
       progress.value = 100;
       completed.value = true;
     } catch (err) {
-      error.value = err instanceof Error ? err.message : 'Download failed';
+      console.log(err.message);
+      error.value = err instanceof Error ? err.message : 'Unknown Error';
 
       throw err;
     } finally {

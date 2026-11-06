@@ -19,7 +19,7 @@ const isHovered = useElementHover(wrapper);
     <!-- Preview -->
     <Transition name="fade" v-if="res.videoID">
       <LazyNuxtImg
-        :src="`/media/${res.id}/images/yt-preview.webp`"
+        :src="`/${res.id}/images/yt-preview.webp`"
         :key="res.id + 'anim'"
         :alt="res.name"
         class="w-full h-full object-cover transition-all absolute top-0 left-0 z-20 scale-175"
