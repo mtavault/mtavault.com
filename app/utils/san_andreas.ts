@@ -212,3 +212,84 @@ export const gtasaVehicles = {
   610: { name: 'Farm Trailer', model: 'farmtr1', category: 'Trailers', modifications: 'None', seats: 0 },
   611: { name: 'Utility Trailer', model: 'utiltr1', category: 'Trailers', modifications: 'None', seats: 0 },
 };
+
+export const gtasaWeathers = (id: number) => {
+  switch (id) {
+    case 0:
+    case 11:
+      return 'Hot, Sunny, Clear';
+    case 1:
+    case 14:
+      return 'Sunny, Low Clouds';
+    case 2:
+    case 13:
+      return 'Sunny, Clear';
+    case 3:
+    case 10:
+      return 'Sunny, Cloudy';
+    case 4:
+    case 15:
+      return 'Dark Clouds';
+    case 5:
+      return 'Sunny, More Low Clouds';
+    case 6:
+      return 'Sunny, Even More Low Clouds';
+    case 7:
+      return 'Cloudy Skies';
+    case 8:
+    case 16:
+      return 'Thunderstorm';
+    case 9:
+      return 'Foggy';
+    case 12:
+      return 'White, Cloudy';
+    case 17:
+    case 18:
+      return 'Hot, Cloudy';
+    case 19:
+      return 'Sandstorm';
+    case 20:
+      return 'Underwater';
+    case 21:
+      return 'Extra Colours 1';
+    case 22:
+      return 'Extra Colours 2';
+    case 23:
+    case 24:
+    case 25:
+    case 26:
+      return 'Pale Orange';
+    case 27:
+    case 28:
+    case 29:
+      return 'Fresh Blue';
+    case 30:
+    case 31:
+    case 32:
+      return 'Dark, Cloudy, Teal';
+    case 33:
+      return 'Dark, Cloudy, Brown';
+    case 34:
+      return 'Blue/Purple';
+    case 35:
+      return 'Dull, Brown';
+    case 36:
+    case 37:
+    case 38:
+      return 'Bright, Foggy, Orange';
+    case 39:
+      'Very Bright';
+    case 40:
+    case 41:
+    case 42:
+      return 'Blue/Purple, Cloudy';
+    case 43:
+      'Toxic, Contaminated Clouds';
+    case 44:
+      'Black/White';
+    case 118:
+      'Pink, Stormy';
+    default:
+      return 'Undocumented';
+  }
+};

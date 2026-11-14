@@ -16,5 +16,5 @@ const onLoad = () => {
 </script>
 <template>
   <LazyNuxtImg :src="`/${id}/images/yt-thumbnail.webp`" class="bg-muted" :key="id + 'img'" provider="cdn" @error="onError" @load="onLoad" v-if="!hasError" />
-  <img src="/img/fallback.webp" v-else />
+  <img src="/img/fallback.webp" :key="id + 'fallback'" v-else />
 </template>

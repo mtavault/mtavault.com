@@ -16,6 +16,8 @@ if (error.value || !data.value) {
   });
 }
 
+const selectedVersion = ref(data.value.isDownloadable && data.value.versions.length ? data.value.versions.at(-1).number : undefined);
+
 const seo = {
   title: data.value.name,
   description: `by ${new Intl.ListFormat('en', { style: 'short' }).format(data.value.authors.map((x) => x.name))}`,
@@ -77,7 +79,7 @@ const createGif = async () => {
   <UContainer>
     <div class="flex flex-col lg:grid lg:grid-cols-12 gap-4">
       <div class="max-lg:col-span-full lg:col-span-9 md:p-4 flex flex-col gap-4">
-        <!-- <UButton label="Do" @click="createGif" loading-auto /> -->
+        <UButton label="Do" @click="createGif" loading-auto />
         <!-- Map ID -->
         <div class="flex gap-4">
           <!-- Image -->
@@ -99,32 +101,37 @@ const createGif = async () => {
             </div>
 
             <!-- Info -->
-            <div class="flex gap-4 text-xs flex-wrap text-nowrap justify-between text-muted font-mono">
-              <div class="flex items-center gap-2 bg-accented px-2 py-1 rounded-lg">
-                <UIcon name="fas:download" class="text-primary" />
-                <p>{{ Intl.NumberFormat('en-us', { notation: 'compact' }).format(data.downloads) }}</p>
-              </div>
-              <div class="flex items-center gap-2 bg-accented px-2 py-1 rounded-lg">
-                <UIcon name="fas:hearts" class="text-red-400" />
-                <p>{{ data.favs?.length || 0 }}</p>
-              </div>
-              <div class="flex items-center gap-2 bg-accented px-2 py-1 rounded-lg">
-                <UIcon name="fas:award" class="text-yellow-400" />
-                <p>{{ data.awardCount || 0 }}</p>
-              </div>
-              <div class="flex items-center gap-2 bg-accented px-2 py-1 rounded-lg">
-                <UIcon name="fas:calendar-days" class="text-secondary" />
-                <i18n-d :value="data.createdAt" format="medium" />
-              </div>
-            </div>
+            <ul class="flex justify-between gap-4">
+              <li>
+                <UUser :avatar="{ icon: 'fas:eye' }" :description="Intl.NumberFormat('en-us', { notation: 'compact' }).format(data.views)" />
+              </li>
+              <li>
+                <UUser :avatar="{ icon: 'fas:download' }" :description="Intl.NumberFormat('en-us', { notation: 'compact' }).format(data.downloads)" />
+              </li>
+              <li>
+                <UUser :avatar="{ icon: 'fas:hearts' }" :description="data.favs?.length || '0'" />
+              </li>
+              <li>
+                <UUser :avatar="{ icon: 'fas:award' }" :description="data.awardCount || '0'" />
+              </li>
+              <li>
+                <UUser :avatar="{ icon: 'fas:calendar-days' }">
+                  <template #description>
+                    <i18n-d :value="data.createdAt" format="medium" />
+                  </template>
+                </UUser>
+              </li>
+            </ul>
           </div>
 
-          <!-- <div class="ml-auto flex items-center justify-center">
-            <div class="flex flex-col items-center">
-              <UIcon name="fas:wreath-laurel" class="text-yellow-400 size-12" />
-              <span>featured</span>
-            </div>
-          </div> -->
+          <div class="ml-auto flex items-center">
+            <!-- Like Button -->
+            <UButton :label="data.favs?.length" color="neutral" variant="soft" size="xl" @click="fav" loading-auto>
+              <template #leading>
+                <UIcon name="fas:hearts" class="size-6" :class="[isFavorited ? 'text-red-400' : 'text-muted']" />
+              </template>
+            </UButton>
+          </div>
         </div>
 
         <!-- Content Container -->
@@ -135,50 +142,57 @@ const createGif = async () => {
       </div>
       <div class="max-lg:col-span-full lg:col-span-3 md:p-4">
         <div class="flex flex-col gap-4">
+          <!-- Download Card -->
+          <UPageCard @click="downloadMap" class="cursor-pointer" v-if="data.isDownloadable && data.versions.length">
+            <div class="flex items-center gap-4">
+              <UIcon name="fas:download" class="size-6 text-primary" />
+              <div class="flex flex-col">
+                <span class="font-bold">Download</span>
+                <span class="text-xs text-muted font-mono">22.21mb</span>
+              </div>
+              <div class="ml-auto">
+                <USelect v-model="selectedVersion" :items="data.versions" label-key="number" value-key="number" v-if="data.versions.length > 1">
+                  v{{ selectedVersion }}
+                  <template #item-label="{ item }"> v{{ item.number }} </template>
+                </USelect>
+                <UBadge :label="`v${data.versions.at(-1).number}`" variant="soft" color="neutral" size="lg" v-else />
+              </div>
+            </div>
+          </UPageCard>
+
+          <!-- Data Card -->
           <UPageCard>
             <div class="flex flex-col gap-8">
-              <UFieldGroup>
-                <UButton
-                  :label="t('common.download')"
-                  icon="fas:download"
-                  class="w-full justify-center"
-                  size="xl"
-                  variant="solid"
-                  @click="downloadMap"
-                  :disabled="downloading || downloadError?.length > 0"
-                  v-if="data.isDownloadable"
-                />
-                <UButton :label="data.favs?.length" color="neutral" size="xl" @click="fav">
-                  <template #trailing>
-                    <UIcon name="fas:hearts" class="size-5 transition-colors" :class="[isFavorited ? 'text-red-400' : 'text-muted']" />
-                  </template>
-                </UButton>
-              </UFieldGroup>
-
-              <USeparator />
-
               <ul class="flex flex-col gap-4">
                 <li>
                   <UUser :avatar="{ icon: 'fas:tags' }" name="Tags" :description="data.tags.join(', ')" />
                 </li>
                 <li>
-                  <UUser :avatar="{ icon: 'fas:cubes' }" name="Objects" :description="data.meta?.total_objects" />
+                  <UUser :avatar="{ icon: 'fas:cubes' }" name="Objects" :description="data.meta?.total_objects" v-if="data.type === 'map'" />
                 </li>
                 <li>
-                  <UUser :avatar="{ icon: 'fas:clock' }" name="Time" :description="data.meta?.time" />
+                  <UUser :avatar="{ icon: 'fas:clock' }" name="Time" :description="data.meta?.time" v-if="data.type === 'map'" />
                 </li>
                 <li>
-                  <UUser :avatar="{ icon: 'fas:cloud' }" name="Weather" description="Sunny & Cloudy" />
+                  <UUser :avatar="{ icon: 'fas:cloud' }" name="Weather" :description="gtasaWeathers(data.meta?.weather) + ` (id: ${data.meta?.weather})`" v-if="data.type === 'map'" />
                 </li>
                 <li>
-                  <UUser :avatar="{ icon: 'fas:cars' }" name="Vehicles" :description="data.meta?.vehicles.map((x) => gtasaVehicles[x].name).join(', ')" />
+                  <UUser :avatar="{ icon: 'fas:cars' }" name="Vehicles" :description="data.meta?.vehicles.map((x) => gtasaVehicles[x].name).join(', ')" v-if="data.type === 'map'" />
                 </li>
               </ul>
             </div>
           </UPageCard>
 
-          <UPageCard icon="fas:cubes" title="Most Used Objects" v-if="data.meta?.objects">
-            <UPageList> {{ data.meta.objects }} </UPageList>
+          <!-- Most Used Objects Card -->
+          <UPageCard icon="fas:cubes" title="Most Used Objects" v-if="data.type === 'map' && data.meta?.objects">
+            <UPageList>
+              <UScrollArea class="max-h-96">
+                <UPageCard v-for="object in data.meta.objects">
+                  {{ object.id }}
+                  {{ object.amount }}
+                </UPageCard>
+              </UScrollArea>
+            </UPageList>
           </UPageCard>
         </div>
       </div>

@@ -44,7 +44,7 @@ const downloadMap = async () => {
 
       <!-- Image -->
       <div class="w-full rounded-lg overflow-hidden aspect-video relative pointer-events-none">
-        <ResourceThumbnail :id="res.id" :width="450" class="w-full object-cover scale-125 h-full z-1 aspect-video" />
+        <ResourceThumbnail :id="res.id" :key="res.id + 'thumb'" :width="450" class="w-full object-cover scale-125 h-full z-1 aspect-video" />
         <Transition name="fade" v-if="res.videoID">
           <LazyNuxtImg
             :src="`/${res.id}/images/yt-preview.webp`"
@@ -78,33 +78,34 @@ const downloadMap = async () => {
             <div class="flex flex-col gap-4 p-2">
               <USeparator type="dashed" />
               <!-- Tags -->
-              <div class="flex items-center gap-2 flex-wrap">
+              <div class="flex items-center gap-2 flex-wrap" v-if="res.tags.length">
                 <UBadge v-for="tag in res.tags" variant="outline" size="sm">
                   {{ tag }}
                 </UBadge>
               </div>
-              <!-- Data (Downloads, Rating, Awards, Release Date) -->
-              <div class="flex gap-4 text-xs flex-wrap text-nowrap justify-between text-muted font-mono">
-                <div class="flex items-center gap-2 bg-accented px-2 py-1 rounded-lg">
-                  <UIcon name="fas:download" class="text-primary" />
-                  <p>{{ Intl.NumberFormat('en-us', { notation: 'compact' }).format(res.downloads) }}</p>
-                </div>
-                <div class="flex items-center gap-2 bg-accented px-2 py-1 rounded-lg">
-                  <UIcon name="fas:hearts" class="text-red-400" />
-                  <p>{{ res.favs?.length || 0 }}</p>
-                </div>
-                <div class="flex items-center gap-2 bg-accented px-2 py-1 rounded-lg">
-                  <UIcon name="fas:award" class="text-yellow-400" />
-                  <p>{{ res.awardCount || 0 }}</p>
-                </div>
-                <div class="flex items-center gap-2 bg-accented px-2 py-1 rounded-lg">
-                  <UIcon name="fas:calendar-days" class="text-secondary" />
-                  <i18n-d :value="res.createdAt" format="medium" />
-                </div>
-              </div>
+              <!-- Data (Views, Downloads, Rating, Awards, Release Date) -->
+              <ul class="flex gap-4">
+                <li>
+                  <UUser :avatar="{ icon: 'fas:eye' }" :description="Intl.NumberFormat('en-us', { notation: 'compact' }).format(res.views)" />
+                </li>
+                <li>
+                  <UUser :avatar="{ icon: 'fas:download' }" :description="Intl.NumberFormat('en-us', { notation: 'compact' }).format(res.downloads)" />
+                </li>
+                <li>
+                  <UUser :avatar="{ icon: 'fas:hearts' }" :description="res.favs?.length || '0'" />
+                </li>
+                <li>
+                  <UUser :avatar="{ icon: 'fas:award' }" :description="res.awardCount || '0'" />
+                </li>
+              </ul>
               <USeparator type="dashed" />
               <!-- Buttons -->
-              <div class="flex justify-end gap-4 z-60">
+              <div class="flex justify-between gap-4 z-60">
+                <UUser :avatar="{ icon: 'fas:calendar-days' }">
+                  <template #description>
+                    <i18n-d :value="res.createdAt" format="medium" />
+                  </template>
+                </UUser>
                 <UButton :label="t('common.download')" color="primary" icon="fas:download" variant="solid" size="sm" @click="downloadMap" :disabled="downloading || downloadError?.length > 0" />
               </div>
             </div>
