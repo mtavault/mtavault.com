@@ -10,6 +10,8 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
+    "@casl/ability": "^7.1.1",
+    "@casl/vue": "^3.1.0",
     "@formkit/auto-animate": "^0.10.0",
     "@fortawesome/fontawesome-svg-core": "^7.3.1",
     "@fortawesome/free-brands-svg-icons": "^7.3.1",

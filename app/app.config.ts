@@ -31,6 +31,10 @@ export default defineAppConfig({
       },
     },
 
+    container: {
+      base: 'py-4',
+    },
+
     button: {
       defaultVariants: {
         variant,
@@ -50,12 +54,24 @@ export default defineAppConfig({
         variant: 'soft',
       },
     },
+    pageCard: {
+      slots: {
+        wrapper: 'flex-row gap-4 items-center',
+        leading: 'mb-0',
+      },
+      defaultVariants: {
+        variant,
+      },
+    },
     input: {
       defaultVariants: {
         variant,
       },
     },
     select: {
+      slots: {
+        content: 'min-w-fit',
+      },
       defaultVariants: {
         variant,
       },

@@ -68,11 +68,16 @@ const downloadMap = async () => {
     });
   }
 };
+
+const createGif = async () => {
+  await $api(`/resource/${data.value.id}/preview`, { method: 'PUT' });
+};
 </script>
 <template>
   <UContainer>
-    <div class="flex flex-col lg:grid lg:grid-cols-12 lg:gap-4">
-      <div class="lg:col-span-9 md:p-4 flex flex-col gap-4">
+    <div class="flex flex-col lg:grid lg:grid-cols-12 gap-4">
+      <div class="max-lg:col-span-full lg:col-span-9 md:p-4 flex flex-col gap-4">
+        <!-- <UButton label="Do" @click="createGif" loading-auto /> -->
         <!-- Map ID -->
         <div class="flex gap-4">
           <!-- Image -->
@@ -128,9 +133,9 @@ const downloadMap = async () => {
         </template>
         <Youtube :id="data.videoID" class="aspect-video w-full rounded-lg border border-default" v-if="data.videoID" />
       </div>
-      <UPageAside class="lg:col-span-3 md:p-4">
+      <div class="max-lg:col-span-full lg:col-span-3 md:p-4">
         <div class="flex flex-col gap-4">
-          <UCard>
+          <UPageCard>
             <div class="flex flex-col gap-8">
               <UFieldGroup>
                 <UButton
@@ -141,6 +146,7 @@ const downloadMap = async () => {
                   variant="solid"
                   @click="downloadMap"
                   :disabled="downloading || downloadError?.length > 0"
+                  v-if="data.isDownloadable"
                 />
                 <UButton :label="data.favs?.length" color="neutral" size="xl" @click="fav">
                   <template #trailing>
@@ -150,10 +156,32 @@ const downloadMap = async () => {
               </UFieldGroup>
 
               <USeparator />
+
+              <ul class="flex flex-col gap-4">
+                <li>
+                  <UUser :avatar="{ icon: 'fas:tags' }" name="Tags" :description="data.tags.join(', ')" />
+                </li>
+                <li>
+                  <UUser :avatar="{ icon: 'fas:cubes' }" name="Objects" :description="data.meta?.total_objects" />
+                </li>
+                <li>
+                  <UUser :avatar="{ icon: 'fas:clock' }" name="Time" :description="data.meta?.time" />
+                </li>
+                <li>
+                  <UUser :avatar="{ icon: 'fas:cloud' }" name="Weather" description="Sunny & Cloudy" />
+                </li>
+                <li>
+                  <UUser :avatar="{ icon: 'fas:cars' }" name="Vehicles" :description="data.meta?.vehicles.map((x) => gtasaVehicles[x].name).join(', ')" />
+                </li>
+              </ul>
             </div>
-          </UCard>
+          </UPageCard>
+
+          <UPageCard icon="fas:cubes" title="Most Used Objects" v-if="data.meta?.objects">
+            <UPageList> {{ data.meta.objects }} </UPageList>
+          </UPageCard>
         </div>
-      </UPageAside>
+      </div>
     </div>
   </UContainer>
 </template>

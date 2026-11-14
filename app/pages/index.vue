@@ -53,7 +53,7 @@ watch(
 </script>
 <template>
   <Hero />
-  <UContainer class="p-4">
+  <UContainer>
     <div class="flex flex-col gap-16 my-16">
       <PageDiscoverResourceShelf sort-variant="latest" resource-variant="map" />
       <PageDiscoverResourceShelf sort-variant="popular" resource-variant="map" />

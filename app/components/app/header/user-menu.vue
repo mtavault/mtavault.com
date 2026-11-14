@@ -71,7 +71,6 @@ const items = ref<DropdownMenuItem[][]>([
 <template>
   <div class="flex items-center gap-4">
     <UButton :label="t('common.discordLogin')" icon="fab:discord" variant="solid" @click="open" v-if="ready && !loggedIn" />
-    <template v-if="loggedIn"> </template>
     <UDropdownMenu :items="items" v-if="loggedIn">
       <UButton color="neutral" variant="ghost">
         <UUser :name="user.username" :avatar="{ src: `/.avatars/${user.id}.webp`, provider: 'cdn' }" :description="user?.role ? user.role.name : undefined" />

@@ -28,6 +28,7 @@ const navItems = computed(() => [
     </template>
 
     <template #right>
+      <UButton to="/create" icon="fas:plus" variant="ghost" />
       <AppHeaderLocaleSelect />
       <AppHeaderUserMenu />
     </template>

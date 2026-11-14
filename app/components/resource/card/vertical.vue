@@ -37,14 +37,14 @@ const downloadMap = async () => {
     <!-- Actual Card -->
     <div
       ref="wrapper"
-      class="group absolute inset-0 z-0 h-fit overflow-hidden rounded-lg bg-elevated border border-default shadow-md transition-all hover:z-50 hover:scale-105 hover:-translate-y-20 origin-top hover:shadow-xl shadow-neutral-950 hover:shadow-black"
+      class="group absolute inset-0 z-0 h-fit overflow-hidden rounded-lg bg-elevated/50 hover:bg-elevated hover:shadow-md shadow-black transition-all hover:z-50 hover:scale-105 hover:-translate-y-20 origin-top"
     >
       <!-- Link Overlay -->
       <ResourceLink :id="res.sfu" :type="res.type" class="absolute top-0 left-0 w-full h-full z-50" />
 
       <!-- Image -->
       <div class="w-full rounded-lg overflow-hidden aspect-video relative pointer-events-none">
-        <ResourceThumbnail :id="res.id" :width="250" class="w-full object-cover scale-125 h-full z-1 aspect-video" />
+        <ResourceThumbnail :id="res.id" :width="450" class="w-full object-cover scale-125 h-full z-1 aspect-video" />
         <Transition name="fade" v-if="res.videoID">
           <LazyNuxtImg
             :src="`/${res.id}/images/yt-preview.webp`"
@@ -52,6 +52,7 @@ const downloadMap = async () => {
             class="w-full h-full object-cover transition-all absolute top-0 left-0 z-20 scale-175"
             :class="{ 'scale-100!': isHovered }"
             provider="cdn"
+            placeholder="/img/fallback.webp"
             v-if="isHovered"
           />
         </Transition>
