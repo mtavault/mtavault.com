@@ -7,7 +7,7 @@ const props = defineProps<{
 const { $api } = useNuxtApp();
 const { t } = useI18n();
 
-const { data, refresh } = await useAsyncData(`${props.sortVariant}-${props.resourceVariant}`, () => $api(`resource/${props.sortVariant}/${props.resourceVariant}`));
+const { data, refresh } = await useAsyncData(`${props.sortVariant}-${props.resourceVariant}`, () => $api(`resource/shelf/${props.sortVariant}/${props.resourceVariant}`));
 
 const page = ref(1);
 

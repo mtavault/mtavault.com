@@ -27,7 +27,9 @@ const downloadMap = async () => {
   <div class="relative min-w-0">
     <!-- Skeleton to match parent height to absolute content -->
     <div class="invisible pointer-events-none">
-      <div class="w-full aspect-video" />
+      <div class="p-1">
+        <div class="w-full aspect-video" />
+      </div>
       <div class="flex flex-col gap-2 p-2">
         <h4 class="font-bold">&thinsp;</h4>
         <p class="text-sm">&thinsp;</p>
@@ -43,19 +45,21 @@ const downloadMap = async () => {
       <ResourceLink :id="res.sfu" :type="res.type" class="absolute top-0 left-0 w-full h-full z-50" />
 
       <!-- Image -->
-      <div class="w-full rounded-lg overflow-hidden aspect-video relative pointer-events-none">
-        <ResourceThumbnail :id="res.id" :key="res.id + 'thumb'" :width="450" class="w-full object-cover scale-125 h-full z-1 aspect-video" />
-        <Transition name="fade" v-if="res.videoID">
-          <LazyNuxtImg
-            :src="`/${res.id}/images/yt-preview.webp`"
-            :key="res.id + 'anim'"
-            class="w-full h-full object-cover transition-all absolute top-0 left-0 z-20 scale-175"
-            :class="{ 'scale-100!': isHovered }"
-            provider="cdn"
-            placeholder="/img/fallback.webp"
-            v-if="isHovered"
-          />
-        </Transition>
+      <div class="p-1">
+        <div class="w-full rounded-lg overflow-hidden aspect-video relative pointer-events-none">
+          <ResourceThumbnail :id="res.id" :key="res.id + 'thumb'" :width="450" class="w-full object-cover scale-125 h-full z-1 aspect-video" />
+          <Transition name="fade" v-if="res.videoID">
+            <LazyNuxtImg
+              :src="`/${res.id}/images/yt-preview.webp`"
+              :key="res.id + 'anim'"
+              class="w-full h-full object-cover transition-all absolute top-0 left-0 z-20 scale-175"
+              :class="{ 'scale-100!': isHovered }"
+              provider="cdn"
+              placeholder="/img/fallback.webp"
+              v-if="isHovered"
+            />
+          </Transition>
+        </div>
       </div>
 
       <!-- Map Name & Author -->

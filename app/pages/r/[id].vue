@@ -1,4 +1,6 @@
 <script lang="ts" setup>
+import type { NavigationMenuItem } from '@nuxt/ui';
+
 const route = useRoute();
 const { t, localeProperties } = useI18n();
 const { $api } = useNuxtApp();
@@ -15,6 +17,40 @@ if (error.value || !data.value) {
     statusMessage: 'Map not found',
   });
 }
+
+const navItems: NavigationMenuItem[] = [
+  {
+    label: 'Description',
+    to: {
+      name: 'r-id',
+      params: {
+        id: route.params.id,
+      },
+    },
+    icon: 'fas:file-lines',
+    exact: true,
+  },
+  {
+    label: 'Comments',
+    to: {
+      name: 'r-id-comments',
+      params: {
+        id: route.params.id,
+      },
+    },
+    icon: 'fas:comments',
+  },
+  {
+    label: 'Files',
+    to: {
+      name: 'r-id-files',
+      params: {
+        id: route.params.id,
+      },
+    },
+    icon: 'fas:folder',
+  },
+];
 
 const selectedVersion = ref(data.value.isDownloadable && data.value.versions.length ? data.value.versions.at(-1).number : undefined);
 
@@ -79,66 +115,72 @@ const createGif = async () => {
   <UContainer>
     <div class="flex flex-col lg:grid lg:grid-cols-12 gap-4">
       <div class="max-lg:col-span-full lg:col-span-9 md:p-4 flex flex-col gap-4">
-        <UButton label="Do" @click="createGif" loading-auto />
+        <!-- <UButton label="Do" @click="createGif" loading-auto /> -->
         <!-- Map ID -->
-        <div class="flex gap-4">
-          <!-- Image -->
-          <div class="aspect-square w-24 h-24 relative overflow-hidden rounded-lg">
-            <ResourceThumbnail :id="data.id" :width="250" class="aspect-square scale-150 object-cover" />
-          </div>
-          <!-- Name & Author -->
-          <div class="flex flex-col justify-between">
-            <div class="flex flex-col">
-              <h4 class="text-highlighted">{{ data.name }}</h4>
-              <div class="text-sm text-muted z-60 flex items-center gap-1">
-                <i18n-t keypath="common.by" />
-                <template v-for="(author, index) in data.authors">
-                  <template v-if="index !== 0 && index < data.authors.length - 1">,&nbsp;</template>
-                  <template v-else-if="index !== 0 && index === data.authors.length - 1">&nbsp;&&nbsp;</template>
-                  <ResourceAuthor :author="author" class="z-60" />
-                </template>
+        <UPageCard spotlight>
+          <div class="flex gap-4">
+            <!-- Image -->
+            <div class="aspect-square w-24 h-24 relative overflow-hidden rounded-lg">
+              <ResourceThumbnail :id="data.id" :width="250" class="aspect-square scale-150 object-cover" />
+            </div>
+            <!-- Name & Author -->
+            <div class="flex flex-col justify-between">
+              <div class="flex flex-col">
+                <h4 class="text-highlighted">{{ data.name }}</h4>
+                <div class="text-sm text-muted z-60 flex items-center gap-1">
+                  <i18n-t keypath="common.by" />
+                  <template v-for="(author, index) in data.authors">
+                    <template v-if="index !== 0 && index < data.authors.length - 1">,&nbsp;</template>
+                    <template v-else-if="index !== 0 && index === data.authors.length - 1">&nbsp;&&nbsp;</template>
+                    <ResourceAuthor :author="author" class="z-60" />
+                  </template>
+                </div>
               </div>
+
+              <!-- Info -->
+              <ul class="flex justify-between gap-4">
+                <li>
+                  <UUser :avatar="{ icon: 'fas:eye' }" :description="Intl.NumberFormat('en-us', { notation: 'compact' }).format(data.views)" />
+                </li>
+                <li>
+                  <UUser :avatar="{ icon: 'fas:download' }" :description="Intl.NumberFormat('en-us', { notation: 'compact' }).format(data.downloads)" />
+                </li>
+                <li>
+                  <UUser :avatar="{ icon: 'fas:award' }" :description="data.awardCount || '0'" />
+                </li>
+                <li>
+                  <UUser :avatar="{ icon: 'fas:calendar-days' }">
+                    <template #description>
+                      <i18n-d :value="data.createdAt" format="medium" />
+                    </template>
+                  </UUser>
+                </li>
+              </ul>
             </div>
 
-            <!-- Info -->
-            <ul class="flex justify-between gap-4">
-              <li>
-                <UUser :avatar="{ icon: 'fas:eye' }" :description="Intl.NumberFormat('en-us', { notation: 'compact' }).format(data.views)" />
-              </li>
-              <li>
-                <UUser :avatar="{ icon: 'fas:download' }" :description="Intl.NumberFormat('en-us', { notation: 'compact' }).format(data.downloads)" />
-              </li>
-              <li>
-                <UUser :avatar="{ icon: 'fas:hearts' }" :description="data.favs?.length || '0'" />
-              </li>
-              <li>
-                <UUser :avatar="{ icon: 'fas:award' }" :description="data.awardCount || '0'" />
-              </li>
-              <li>
-                <UUser :avatar="{ icon: 'fas:calendar-days' }">
-                  <template #description>
-                    <i18n-d :value="data.createdAt" format="medium" />
-                  </template>
-                </UUser>
-              </li>
-            </ul>
+            <div class="ml-auto flex items-center">
+              <!-- Like Button -->
+              <UButton :label="data.favs?.length" color="neutral" variant="soft" size="xl" @click="fav" loading-auto>
+                <template #leading>
+                  <UIcon name="fas:hearts" class="size-6" :class="[isFavorited ? 'text-red-400' : 'text-muted']" />
+                </template>
+              </UButton>
+            </div>
           </div>
-
-          <div class="ml-auto flex items-center">
-            <!-- Like Button -->
-            <UButton :label="data.favs?.length" color="neutral" variant="soft" size="xl" @click="fav" loading-auto>
-              <template #leading>
-                <UIcon name="fas:hearts" class="size-6" :class="[isFavorited ? 'text-red-400' : 'text-muted']" />
-              </template>
-            </UButton>
-          </div>
-        </div>
+        </UPageCard>
 
         <!-- Content Container -->
-        <template v-if="data.type === 'model'">
-          <div class="aspect-video border border-default rounded-lg">3d scene</div>
-        </template>
-        <Youtube :id="data.videoID" class="aspect-video w-full rounded-lg border border-default" v-if="data.videoID" />
+        <UNavigationMenu
+          :items="navItems"
+          :ui="{
+            root: 'border-b border-default py-2 gap-4',
+            item: 'py-0',
+            link: 'px-4 gap-2',
+            linkLeadingIcon: 'size-6',
+            linkLabel: 'font-normal',
+          }"
+        />
+        <NuxtPage key="resource" keepalive />
       </div>
       <div class="max-lg:col-span-full lg:col-span-3 md:p-4">
         <div class="flex flex-col gap-4">
@@ -187,10 +229,17 @@ const createGif = async () => {
           <UPageCard icon="fas:cubes" title="Most Used Objects" v-if="data.type === 'map' && data.meta?.objects">
             <UPageList>
               <UScrollArea class="max-h-96">
-                <UPageCard v-for="object in data.meta.objects">
-                  {{ object.id }}
-                  {{ object.amount }}
-                </UPageCard>
+                <div class="flex flex-col gap-4">
+                  <UPopover mode="hover" v-for="object in data.meta.objects.slice(0, 20)" :content="{ side: 'right' }">
+                    <UPageCard @click="">
+                      <UUser :avatar="{ src: `/.objects/${object.id}.webp`, provider: 'cdn', lazy: true }" :name="gtasaObjects[object.id]?.name ?? 'Unknown'" :description="`x${object.amount}`">
+                      </UUser>
+                    </UPageCard>
+                    <template #content>
+                      <NuxtImg :src="`/.objects/${object.id}.webp`" provider="cdn" class="aspect-square rounded-lg" width="250" />
+                    </template>
+                  </UPopover>
+                </div>
               </UScrollArea>
             </UPageList>
           </UPageCard>
