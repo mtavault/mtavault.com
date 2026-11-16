@@ -160,10 +160,11 @@ const createGif = async () => {
 
             <div class="ml-auto flex items-center">
               <!-- Like Button -->
-              <UButton :label="data.favs?.length" color="neutral" variant="soft" size="xl" @click="fav" loading-auto>
+              <UButton color="neutral" variant="soft" size="xl" @click="fav" loading-auto>
                 <template #leading>
                   <UIcon name="fas:hearts" class="size-6" :class="[isFavorited ? 'text-red-400' : 'text-muted']" />
                 </template>
+                <span class="px-4">{{ data.favs?.length }}</span>
               </UButton>
             </div>
           </div>

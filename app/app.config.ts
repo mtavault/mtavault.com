@@ -9,7 +9,7 @@ export default defineAppConfig({
       info: 'blue',
       warning: 'yellow',
       error: 'red',
-      neutral: 'neutral',
+      neutral: 'zinc',
     },
     icons: {
       arrowDown: 'fas:arrow-down',
