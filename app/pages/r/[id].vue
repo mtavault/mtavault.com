@@ -9,7 +9,7 @@ const { user, loggedIn } = useUserSession();
 const toast = useToast();
 const { downloadFile, progress, completed, error: downloadError, downloading } = useFileDownload();
 
-const { data, refresh, error } = await useAsyncData(`resource-${route.params.id}`, () => $api(`/resource/${route.params.id}`));
+const { data, refresh, error } = await useResource(computed(() => route.params.id as string));
 
 if (error.value || !data.value) {
   throw createError({
@@ -113,7 +113,7 @@ const createGif = async () => {
 </script>
 <template>
   <UContainer>
-    <div class="flex flex-col lg:grid lg:grid-cols-12 gap-4">
+    <div class="flex flex-col lg:grid lg:grid-cols-12 gap-4 items-start">
       <div class="max-lg:col-span-full lg:col-span-9 md:p-4 flex flex-col gap-4">
         <!-- <UButton label="Do" @click="createGif" loading-auto /> -->
         <!-- Map ID -->
@@ -160,11 +160,15 @@ const createGif = async () => {
 
             <div class="ml-auto flex items-center">
               <!-- Like Button -->
-              <UButton color="neutral" variant="soft" size="xl" @click="fav" loading-auto>
-                <template #leading>
-                  <UIcon name="fas:hearts" class="size-6" :class="[isFavorited ? 'text-red-400' : 'text-muted']" />
-                </template>
-                <span class="px-4">{{ data.favs?.length }}</span>
+              <UButton :color="isFavorited ? 'error' : 'neutral'" variant="soft" size="xl" @click="fav" loading-auto>
+                <div class="flex items-center gap-2">
+                  <UIcon name="fas:hearts" class="size-6" :class="{ 'text-muted': !isFavorited }" />
+                  <div class="flex gap-4 items-center">
+                    <span>Like</span>
+                    <span>|</span>
+                    <span class="font-mono">{{ data.favs?.length }}</span>
+                  </div>
+                </div>
               </UButton>
             </div>
           </div>
@@ -183,7 +187,7 @@ const createGif = async () => {
         />
         <NuxtPage key="resource" keepalive />
       </div>
-      <div class="max-lg:col-span-full lg:col-span-3 md:p-4">
+      <div class="max-lg:col-span-full lg:col-span-3 md:p-4 sticky top-(--ui-header-height)">
         <div class="flex flex-col gap-4">
           <!-- Download Card -->
           <UPageCard @click="downloadMap" class="cursor-pointer" v-if="data.isDownloadable && data.versions.length">
@@ -204,46 +208,10 @@ const createGif = async () => {
           </UPageCard>
 
           <!-- Data Card -->
-          <UPageCard>
-            <div class="flex flex-col gap-8">
-              <ul class="flex flex-col gap-4">
-                <li>
-                  <UUser :avatar="{ icon: 'fas:tags' }" name="Tags" :description="data.tags.join(', ')" />
-                </li>
-                <li>
-                  <UUser :avatar="{ icon: 'fas:cubes' }" name="Objects" :description="data.meta?.total_objects" v-if="data.type === 'map'" />
-                </li>
-                <li>
-                  <UUser :avatar="{ icon: 'fas:clock' }" name="Time" :description="data.meta?.time" v-if="data.type === 'map'" />
-                </li>
-                <li>
-                  <UUser :avatar="{ icon: 'fas:cloud' }" name="Weather" :description="gtasaWeathers(data.meta?.weather) + ` (id: ${data.meta?.weather})`" v-if="data.type === 'map'" />
-                </li>
-                <li>
-                  <UUser :avatar="{ icon: 'fas:cars' }" name="Vehicles" :description="data.meta?.vehicles.map((x) => gtasaVehicles[x].name).join(', ')" v-if="data.type === 'map'" />
-                </li>
-              </ul>
-            </div>
-          </UPageCard>
+          <PageResourceDataCard />
 
           <!-- Most Used Objects Card -->
-          <UPageCard icon="fas:cubes" title="Most Used Objects" v-if="data.type === 'map' && data.meta?.objects">
-            <UPageList>
-              <UScrollArea class="max-h-96">
-                <div class="flex flex-col gap-4">
-                  <UPopover mode="hover" v-for="object in data.meta.objects.slice(0, 20)" :content="{ side: 'right' }">
-                    <UPageCard @click="">
-                      <UUser :avatar="{ src: `/.objects/${object.id}.webp`, provider: 'cdn', lazy: true }" :name="gtasaObjects[object.id]?.name ?? 'Unknown'" :description="`x${object.amount}`">
-                      </UUser>
-                    </UPageCard>
-                    <template #content>
-                      <NuxtImg :src="`/.objects/${object.id}.webp`" provider="cdn" class="aspect-square rounded-lg" width="250" />
-                    </template>
-                  </UPopover>
-                </div>
-              </UScrollArea>
-            </UPageList>
-          </UPageCard>
+          <PageResourceMostUsedObjects />
         </div>
       </div>
     </div>

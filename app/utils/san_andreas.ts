@@ -290,7 +290,7 @@ export const gtasaWeathers = (id: number) => {
     case 118:
       'Pink, Stormy';
     default:
-      return 'Undocumented';
+      return 'Unknown';
   }
 };
 

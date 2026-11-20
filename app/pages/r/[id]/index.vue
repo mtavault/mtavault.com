@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 const route = useRoute();
-const { data } = useNuxtData(`resource-${route.params.id}`);
+const { data, refresh, error } = await useResource(computed(() => route.params.id as string));
 </script>
 <template>
   <template v-if="data.type === 'model'">
