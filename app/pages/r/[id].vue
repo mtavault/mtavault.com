@@ -198,7 +198,7 @@ const createGif = async () => {
                 <span class="text-xs text-muted font-mono">22.21mb</span>
               </div>
               <div class="ml-auto">
-                <USelect v-model="selectedVersion" :items="data.versions" label-key="number" value-key="number" v-if="data.versions.length > 1">
+                <USelect v-model="selectedVersion" :items="data.versions.sort((a, b) => (b.createdAt > a.createdAt ? 1 : -1))" label-key="number" value-key="number" v-if="data.versions.length > 1">
                   v{{ selectedVersion }}
                   <template #item-label="{ item }"> v{{ item.number }} </template>
                 </USelect>

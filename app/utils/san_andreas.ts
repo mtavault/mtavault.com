@@ -219,6 +219,8 @@ export const gtasaWeathers = (id: number) => {
     case 11:
       return 'Hot, Sunny, Clear';
     case 1:
+    case 5:
+    case 6:
     case 14:
       return 'Sunny, Low Clouds';
     case 2:
@@ -230,10 +232,6 @@ export const gtasaWeathers = (id: number) => {
     case 4:
     case 15:
       return 'Dark Clouds';
-    case 5:
-      return 'Sunny, More Low Clouds';
-    case 6:
-      return 'Sunny, Even More Low Clouds';
     case 7:
       return 'Cloudy Skies';
     case 8:

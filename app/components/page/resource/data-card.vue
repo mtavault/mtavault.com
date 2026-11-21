@@ -20,7 +20,13 @@ const { data, refresh, error } = await useResource(computed(() => route.params.i
   <UPageCard>
     <div class="flex flex-col gap-8">
       <ul class="flex flex-col gap-4">
-        <ReuseTemplate icon="fas:tags" label="Tags" value="Moin"> alla </ReuseTemplate>
+        <ReuseTemplate icon="fas:tags" label="Tags" v-if="data.tags?.length">
+          <div class="flex items-center gap-2 flex-wrap">
+            <UBadge v-for="tag in data.tags" variant="outline" size="sm">
+              {{ tag.tagId }}
+            </UBadge>
+          </div>
+        </ReuseTemplate>
         <ReuseTemplate icon="fas:cubes" label="Objects" v-if="data.type === 'map'">
           {{ Intl.NumberFormat('en-us', { notation: 'compact' }).format(data.meta?.total_objects) }}
         </ReuseTemplate>

@@ -82,9 +82,9 @@ const downloadMap = async () => {
             <div class="flex flex-col gap-4 p-2">
               <USeparator type="dashed" />
               <!-- Tags -->
-              <div class="flex items-center gap-2 flex-wrap" v-if="res.tags.length">
+              <div class="flex items-center gap-2 flex-wrap" v-if="res.tags?.length">
                 <UBadge v-for="tag in res.tags" variant="outline" size="sm">
-                  {{ tag }}
+                  {{ tag.tagId }}
                 </UBadge>
               </div>
               <!-- Data (Views, Downloads, Rating, Awards, Release Date) -->
